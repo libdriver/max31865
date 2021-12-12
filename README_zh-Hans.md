@@ -4,7 +4,7 @@
 
 ## LibDriver MAX31865
 
-[English](/README.md) | [ 简体中文](/README_CH.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
 
 MAX31865是简单易用的热敏电阻至数字输出转换器，优化用于铂电阻温度检测器(RTD)。外部电阻设置RTD灵敏度，高精度Δ- Σ ADC将RTD电阻与基准电阻之比转换为数字输出。MAX31865输入具有高达±45V的过压保护，提供可配置的RTD及电缆开路、短路条件检测。MAX31865被用于工业设备、仪表和医疗装置等领域。
 
@@ -134,7 +134,7 @@ return 0;
 
 ### 版权
 
-版权(C) LibDriver 2015-2021 版权所有
+版权 (c) 2015 - 现在 LibDriver 版权所有
 
 MIT 许可证（MIT）
 
