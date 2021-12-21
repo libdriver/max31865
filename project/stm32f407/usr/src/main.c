@@ -105,12 +105,12 @@ uint8_t max31865(uint8_t argc, char **argv)
             max31865_interface_debug_print("max31865 -i\n\tshow max31865 chip and driver information.\n");
             max31865_interface_debug_print("max31865 -h\n\tshow max31865 help.\n");
             max31865_interface_debug_print("max31865 -p\n\tshow max31865 pin connections of the current board.\n");
-            max31865_interface_debug_print("max30205 -t reg\n\trun max31865 register test.\n");
-            max31865_interface_debug_print("max30205 -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t"
+            max31865_interface_debug_print("max31865 -t reg\n\trun max31865 register test.\n");
+            max31865_interface_debug_print("max31865 -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t"
                                            "run max31865 read test.times means test times.resistor means reference resistor.\n");
-            max31865_interface_debug_print("max30205 -c read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t"
+            max31865_interface_debug_print("max31865 -c read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t"
                                            "run max31865 read function.times means test times.resistor means reference resistor.\n");
-            max31865_interface_debug_print("max30205 -c shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t" 
+            max31865_interface_debug_print("max31865 -c shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t" 
                                            "run max31865 shot function.times means test times.resistor means reference resistor.\n");
             
             return 0;

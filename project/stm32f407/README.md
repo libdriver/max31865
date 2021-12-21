@@ -184,13 +184,13 @@ max31865 -h
 	show max31865 help.
 max31865 -p
 	show max31865 pin connections of the current board.
-max30205 -t reg
+max31865 -t reg
 	run max31865 register test.
-max30205 -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
+max31865 -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
 	run max31865 read test.times means test times.resistor means reference resistor.
-max30205 -c read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
+max31865 -c read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
 	run max31865 read function.times means test times.resistor means reference resistor.
-max30205 -c shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
+max31865 -c shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
 	run max31865 shot function.times means test times.resistor means reference resistor.
 ```
 
