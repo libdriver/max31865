@@ -1,7 +1,7 @@
 var group__max31865__base__driver =
 [
     [ "max31865_handle_s", "structmax31865__handle__s.html", [
-      [ "debug_print", "structmax31865__handle__s.html#a75f9f50c23e87e9407f9ec4e34bb42f2", null ],
+      [ "debug_print", "structmax31865__handle__s.html#a769d5b3a6c14790a0e126e8fe70b384b", null ],
       [ "delay_ms", "structmax31865__handle__s.html#a406c9433252b7366de417b7a60915c81", null ],
       [ "inited", "structmax31865__handle__s.html#a19bedf28d2b9748f6a62d9ae93f4e68f", null ],
       [ "ref_resistor", "structmax31865__handle__s.html#aa35e61f17881237580bfbbe15c4eacb2", null ],

@@ -51,7 +51,7 @@ static max31865_handle_t gs_handle;        /**< max31865 handle */
  */
 uint8_t max31865_basic_init(max31865_wire_t wire, max31865_resistor_t type, float ref_resistor)
 {
-    volatile uint8_t res;
+    uint8_t res;
     
     /* link function */
     DRIVER_MAX31865_LINK_INIT(&gs_handle, max31865_handle_t);
@@ -64,7 +64,7 @@ uint8_t max31865_basic_init(max31865_wire_t wire, max31865_resistor_t type, floa
     
     /* max31865 init */
     res = max31865_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: init failed.\n");
         
@@ -73,80 +73,80 @@ uint8_t max31865_basic_init(max31865_wire_t wire, max31865_resistor_t type, floa
     
     /* set filter */
     res = max31865_set_filter_select(&gs_handle, MAX31865_BASIC_DEFAULT_FILTER_SELECT);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set filter select failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set wire type */
     res = max31865_set_wire(&gs_handle, wire);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set PT resistor type */
     res = max31865_set_resistor(&gs_handle, type);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set resistor type failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set reference resistor */
     res = max31865_set_reference_resistor(&gs_handle, ref_resistor);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set reference resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set fault detection cycle control */
     res = max31865_set_fault_detection_cycle_control(&gs_handle, MAX31865_BASIC_DEFAULT_FAULT_DETECTION_CYCLE_CONTROL);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set fault detection cycle control failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set high fault threshold */
     res = max31865_set_high_fault_threshold(&gs_handle, MAX31865_BASIC_DEFAULT_HIGH_FAULT_THRESHOLD);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set high fault thresholdl failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* set low fault threshold */
     res = max31865_set_low_fault_threshold(&gs_handle, MAX31865_BASIC_DEFAULT_LOW_FAULT_THRESHOLD);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set low fault threshold failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     
     /* start continuous read */
     res = max31865_start_continuous_read(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: start continuous read failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -164,10 +164,10 @@ uint8_t max31865_basic_init(max31865_wire_t wire, max31865_resistor_t type, floa
  */
 uint8_t max31865_basic_read(float *temp)
 {
-    volatile uint16_t raw;
+    uint16_t raw;
     
     /* continuous read */
-    if (max31865_continuous_read(&gs_handle, (uint16_t *)&raw, temp))
+    if (max31865_continuous_read(&gs_handle, (uint16_t *)&raw, temp) != 0)
     {
         return 1;
     }
@@ -186,11 +186,11 @@ uint8_t max31865_basic_read(float *temp)
  */
 uint8_t max31865_basic_deinit(void)
 {
-    volatile uint8_t res;
+    uint8_t res;
     
     /* stop continuous read */
     res = max31865_stop_continuous_read(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: stop continuous read failed.\n");
         
@@ -198,7 +198,7 @@ uint8_t max31865_basic_deinit(void)
     }
     
     /* deinit */
-    if (max31865_deinit(&gs_handle))
+    if (max31865_deinit(&gs_handle) != 0)
     {
         return 1;
     }

@@ -89,8 +89,8 @@ $(document).ready(function(){initNavTree('driver__max31865__interface_8h_source.
 </div><!--header-->
 <div class="contents">
 <a href="driver__max31865__interface_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef _DRIVER_MAX31865_INTERFACE_H_</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define _DRIVER_MAX31865_INTERFACE_H_</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef DRIVER_MAX31865_INTERFACE_H</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define DRIVER_MAX31865_INTERFACE_H</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="driver__max31865_8h.html">driver_max31865.h</a>&quot;</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
@@ -108,20 +108,20 @@ $(document).ready(function(){initNavTree('driver__max31865__interface_8h_source.
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__max31865__interface__driver.html#ga8d24a06fed18485da429458d03cb1501">max31865_interface_delay_ms</a>(uint32_t ms);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;uint16_t <a class="code" href="group__max31865__interface__driver.html#ga75e9d973541657f48f1f8368d6e17ea7">max31865_interface_debug_print</a>(<span class="keywordtype">char</span> *fmt, ...);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__max31865__interface__driver.html#gafd695b040505e1aef8acfc8588943af4">max31865_interface_debug_print</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keyword">const</span> fmt, ...);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adriver__max31865_8h_html"><div class="ttname"><a href="driver__max31865_8h.html">driver_max31865.h</a></div><div class="ttdoc">driver max31865 header file</div></div>
-<div class="ttc" id="agroup__max31865__interface__driver_html_ga75e9d973541657f48f1f8368d6e17ea7"><div class="ttname"><a href="group__max31865__interface__driver.html#ga75e9d973541657f48f1f8368d6e17ea7">max31865_interface_debug_print</a></div><div class="ttdeci">uint16_t max31865_interface_debug_print(char *fmt,...)</div><div class="ttdoc">interface print format data</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00110">driver_max31865_interface_template.c:110</a></div></div>
 <div class="ttc" id="agroup__max31865__interface__driver_html_ga8c54c9ea5aea41818cbde83d9e8f9802"><div class="ttname"><a href="group__max31865__interface__driver.html#ga8c54c9ea5aea41818cbde83d9e8f9802">max31865_interface_spi_init</a></div><div class="ttdeci">uint8_t max31865_interface_spi_init(void)</div><div class="ttdoc">interface spi bus init</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00047">driver_max31865_interface_template.c:47</a></div></div>
 <div class="ttc" id="agroup__max31865__interface__driver_html_ga8d24a06fed18485da429458d03cb1501"><div class="ttname"><a href="group__max31865__interface__driver.html#ga8d24a06fed18485da429458d03cb1501">max31865_interface_delay_ms</a></div><div class="ttdeci">void max31865_interface_delay_ms(uint32_t ms)</div><div class="ttdoc">interface delay ms</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00099">driver_max31865_interface_template.c:99</a></div></div>
 <div class="ttc" id="agroup__max31865__interface__driver_html_gaaaea559fd99a0079e3007a28344ff6b4"><div class="ttname"><a href="group__max31865__interface__driver.html#gaaaea559fd99a0079e3007a28344ff6b4">max31865_interface_spi_write</a></div><div class="ttdeci">uint8_t max31865_interface_spi_write(uint8_t reg, uint8_t *buf, uint16_t len)</div><div class="ttdoc">interface spi bus write</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00089">driver_max31865_interface_template.c:89</a></div></div>
 <div class="ttc" id="agroup__max31865__interface__driver_html_gac12e93e1e9ccee6d41ed11fd3a5319e3"><div class="ttname"><a href="group__max31865__interface__driver.html#gac12e93e1e9ccee6d41ed11fd3a5319e3">max31865_interface_spi_read</a></div><div class="ttdeci">uint8_t max31865_interface_spi_read(uint8_t reg, uint8_t *buf, uint16_t len)</div><div class="ttdoc">interface spi bus read</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00074">driver_max31865_interface_template.c:74</a></div></div>
 <div class="ttc" id="agroup__max31865__interface__driver_html_gaf6ba4092eb614e71ec52ebe795f8a29c"><div class="ttname"><a href="group__max31865__interface__driver.html#gaf6ba4092eb614e71ec52ebe795f8a29c">max31865_interface_spi_deinit</a></div><div class="ttdeci">uint8_t max31865_interface_spi_deinit(void)</div><div class="ttdoc">interface spi bus deinit</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00059">driver_max31865_interface_template.c:59</a></div></div>
+<div class="ttc" id="agroup__max31865__interface__driver_html_gafd695b040505e1aef8acfc8588943af4"><div class="ttname"><a href="group__max31865__interface__driver.html#gafd695b040505e1aef8acfc8588943af4">max31865_interface_debug_print</a></div><div class="ttdeci">void max31865_interface_debug_print(const char *const fmt,...)</div><div class="ttdoc">interface print format data</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865__interface__template_8c_source.html#l00109">driver_max31865_interface_template.c:109</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

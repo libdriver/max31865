@@ -36,6 +36,7 @@
  */
  
 #include "driver_max31865_register_test.h"
+#include <math.h>
 #include <stdlib.h>
 
 static max31865_handle_t gs_handle;        /**< max31865 handle */
@@ -49,11 +50,11 @@ static max31865_handle_t gs_handle;        /**< max31865 handle */
  */
 uint8_t max31865_register_test(void)
 {
-    volatile uint8_t res;
-    volatile float resistor_in;
-    volatile float resistor_out;
-    volatile uint16_t threshold_in;
-    volatile uint16_t threshold_out;
+    uint8_t res;
+    float resistor_in;
+    float resistor_out;
+    uint16_t threshold_in;
+    uint16_t threshold_out;
     max31865_info_t info;
     max31865_filter_select_t filter;
     max31865_wire_t wire;
@@ -72,7 +73,7 @@ uint8_t max31865_register_test(void)
     
     /* get chip information */
     res = max31865_info(&info);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get info failed.\n");
        
@@ -94,7 +95,7 @@ uint8_t max31865_register_test(void)
     
     /* max31865 init */
     res = max31865_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: init failed.\n");
        
@@ -109,19 +110,19 @@ uint8_t max31865_register_test(void)
     
     /* set 60Hz */
     res = max31865_set_filter_select(&gs_handle, MAX31865_FILTER_SELECT_60HZ);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set filter select failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set filter select 60Hz.\n");
     res = max31865_get_filter_select(&gs_handle, &filter);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get filter select failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -129,19 +130,19 @@ uint8_t max31865_register_test(void)
     
     /* set 50Hz */
     res = max31865_set_filter_select(&gs_handle, MAX31865_FILTER_SELECT_50HZ);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set filter select failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set filter select 50Hz.\n");
     res = max31865_get_filter_select(&gs_handle, &filter);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get filter select failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -152,19 +153,19 @@ uint8_t max31865_register_test(void)
     
     /* set wire 2 */
     res = max31865_set_wire(&gs_handle, MAX31865_WIRE_2);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set 2 wire.\n");
     res = max31865_get_wire(&gs_handle, &wire);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -172,19 +173,19 @@ uint8_t max31865_register_test(void)
     
     /* set wire 3 */
     res = max31865_set_wire(&gs_handle, MAX31865_WIRE_3);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set 3 wire.\n");
     res = max31865_get_wire(&gs_handle, &wire);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -192,19 +193,19 @@ uint8_t max31865_register_test(void)
     
     /* set wire 4 */
     res = max31865_set_wire(&gs_handle, MAX31865_WIRE_4);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set 4 wire.\n");
     res = max31865_get_wire(&gs_handle, &wire);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get wire failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -215,19 +216,19 @@ uint8_t max31865_register_test(void)
     
     /* set 100PT */
     res = max31865_set_resistor(&gs_handle, MAX31865_RESISTOR_100PT);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set 100 pt resistor.\n");
     res = max31865_get_resistor(&gs_handle, &resistor);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -235,19 +236,19 @@ uint8_t max31865_register_test(void)
     
     /* set 1000PT */
     res = max31865_set_resistor(&gs_handle, MAX31865_RESISTOR_1000PT);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set 1000 pt resistor.\n");
     res = max31865_get_resistor(&gs_handle, &resistor);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -257,42 +258,42 @@ uint8_t max31865_register_test(void)
     max31865_interface_debug_print("max31865: max31865_set_reference_resistor/max31865_get_reference_resistor test.\n");
     resistor_in = (float)(rand()%65536)/100.0f;
     res = max31865_set_reference_resistor(&gs_handle, resistor_in);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set reference resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set reference resistor %f.\n", resistor_in);
     res = max31865_get_reference_resistor(&gs_handle, (float *)&resistor_out);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get reference resistor failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
-    max31865_interface_debug_print("max31865: check reference resistor %s.\n", resistor_out == resistor_in ? "ok" : "error");
+    max31865_interface_debug_print("max31865: check reference resistor %s.\n", fabsf(resistor_out - resistor_in) < 0.000001f ? "ok" : "error");
     
     /* max31865_set_vbias/max31865_get_vbias test */
     max31865_interface_debug_print("max31865: max31865_set_vbias/max31865_get_vbias test.\n");
     
     /* enable */
     res = max31865_set_vbias(&gs_handle, MAX31865_BOOL_TRUE);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set vbias failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: enable vbias.\n");
     res = max31865_get_vbias(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get vbias failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -300,19 +301,19 @@ uint8_t max31865_register_test(void)
     
     /* disable */
     res = max31865_set_vbias(&gs_handle, MAX31865_BOOL_FALSE);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set vbias failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: disable vbias.\n");
     res = max31865_get_vbias(&gs_handle, &enable);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get vbias failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -323,10 +324,10 @@ uint8_t max31865_register_test(void)
     
     /* no action */
     res = max31865_set_fault_detection_cycle_control(&gs_handle, MAX31865_FAULT_DETECTION_CYCLE_CONTROL_NO_ACTION);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set fault detection cycle control failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -334,10 +335,10 @@ uint8_t max31865_register_test(void)
     
     /* automatic delay */
     res = max31865_set_fault_detection_cycle_control(&gs_handle, MAX31865_FAULT_DETECTION_CYCLE_CONTROL_AUTOMATIC_DELAY);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set fault detection cycle control failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -345,10 +346,10 @@ uint8_t max31865_register_test(void)
     
     /* manual delay cycle 1 */
     res = max31865_set_fault_detection_cycle_control(&gs_handle, MAX31865_FAULT_DETECTION_CYCLE_CONTROL_MANUAL_DELAY_CYCLE_1);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set fault detection cycle control failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -356,10 +357,10 @@ uint8_t max31865_register_test(void)
     
     /* manual delay cycle 2 */
     res = max31865_set_fault_detection_cycle_control(&gs_handle, MAX31865_FAULT_DETECTION_CYCLE_CONTROL_MANUAL_DELAY_CYCLE_2);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set fault detection cycle control failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -368,10 +369,10 @@ uint8_t max31865_register_test(void)
     /* max31865_get_fault_detection_cycle_control test */
     max31865_interface_debug_print("max31865: max31865_get_fault_detection_cycle_control test.\n");
     res = max31865_get_fault_detection_cycle_control(&gs_handle, &status);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get fault detection cycle control failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -380,10 +381,10 @@ uint8_t max31865_register_test(void)
     /* max31865_clear_fault_status test */
     max31865_interface_debug_print("max31865: max31865_clear_fault_status test.\n");
     res = max31865_clear_fault_status(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: clear fault status failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -393,19 +394,19 @@ uint8_t max31865_register_test(void)
     max31865_interface_debug_print("max31865: max31865_set_high_fault_threshold/max31865_get_high_fault_threshold test.\n");
     threshold_in = rand()%65536;
     res = max31865_set_high_fault_threshold(&gs_handle, threshold_in);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set high fault threshold failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set high fault threshold %d.\n", threshold_in);
     res = max31865_get_high_fault_threshold(&gs_handle, (uint16_t *)&threshold_out);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get high fault threshold failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -415,19 +416,19 @@ uint8_t max31865_register_test(void)
     max31865_interface_debug_print("max31865: max31865_set_low_fault_threshold/max31865_get_low_fault_threshold test.\n");
     threshold_in = rand()%65536;
     res = max31865_set_low_fault_threshold(&gs_handle, threshold_in);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: set low fault threshold failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
     max31865_interface_debug_print("max31865: set low fault threshold %d.\n", threshold_in);
     res = max31865_get_low_fault_threshold(&gs_handle, (uint16_t *)&threshold_out);
-    if (res)
+    if (res != 0)
     {
         max31865_interface_debug_print("max31865: get low fault threshold failed.\n");
-        max31865_deinit(&gs_handle);
+        (void)max31865_deinit(&gs_handle);
         
         return 1;
     }
@@ -435,7 +436,7 @@ uint8_t max31865_register_test(void)
     
     /* finish register test */
     max31865_interface_debug_print("max31865: finish register test.\n");
-    max31865_deinit(&gs_handle);
+    (void)max31865_deinit(&gs_handle);
     
     return 0;
 }

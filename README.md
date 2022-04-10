@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver MAX31865
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/max31865/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/max31865/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 The MAX31865 is an easy-to-use resistance-to-digital converter optimized for platinum resistance temperature detectors (RTDs). An external resistor sets the sensitivity for the RTD being used and a precision delta-sigma ADC converts the ratio of the RTD resistance to the reference resistance into digital form. The MAX31865’s inputs are protected against overvoltage faults as large as Q45V. Programmable detection of RTD and cable open and short conditions is included. MAX31865 is used in industrial equipment, instruments and medical devices.
 
-LibDriver MAX31865 is the full function driver of MAX31865 launched by LibDriver.It provides functions of PT temperature continuous mode reading, PT temperature single mode reading, etc.
+LibDriver MAX31865 is the full function driver of MAX31865 launched by LibDriver.It provides functions of PT temperature continuous mode reading, PT temperature single mode reading, etc. LibDriver is MISRA compliant.
 
 ### Table of Contents
 

@@ -65,8 +65,8 @@
  * @brief calculate definition
  */
 #define WRITE_ADDRESS_MASK        0x80             /**< spi write mask */
-#define RTD_A                     3.9083e-3        /**< rtd a */
-#define RTD_B                     -5.775e-7        /**< rtd b */
+#define RTD_A                     3.9083e-3f       /**< rtd a */
+#define RTD_B                     -5.775e-7f       /**< rtd b */
 
 /**
  * @brief     convert the temperature
@@ -76,10 +76,10 @@
  * @return    converted value
  * @note      none
  */
-static float _max31865_temperature_conversion(float rt, float rtd_nominal, float ref_resistor)
+static float a_max31865_temperature_conversion(float rt, float rtd_nominal, float ref_resistor)
 {
-    volatile float z1, z2, z3, z4, temp;
-    volatile float rpoly = rt;
+    float z1, z2, z3, z4, temp;
+    float rpoly = rt;
     
     rt /= 32768;                             /* div 32768 */
     rt *= ref_resistor;                      /* ref_resistor */
@@ -88,7 +88,7 @@ static float _max31865_temperature_conversion(float rt, float rtd_nominal, float
     z3 = (4 * RTD_B) / rtd_nominal;          /* get z3 */
     z4 = 2 * RTD_B;                          /* get z4 */
     temp = z2 + (z3 * rt);                   /* calculate temp */
-    temp = (sqrt(temp) + z1) / z4;           /* sqrt */
+    temp = (sqrtf(temp) + z1) / z4;          /* sqrt */
     if (temp >= 0)                           /* check temp */
     {
         return temp;                         /* return temp */
@@ -121,8 +121,6 @@ static float _max31865_temperature_conversion(float rt, float rtd_nominal, float
  */
 uint8_t max31865_init(max31865_handle_t *handle)
 {
-    volatile uint8_t prev;
-    
     if (handle == NULL)                                                /* check handle */
     {
         return 2;                                                      /* return error */
@@ -162,7 +160,7 @@ uint8_t max31865_init(max31865_handle_t *handle)
         return 3;                                                      /* return error */
     }
     
-    if (handle->spi_init())                                            /* spi init */
+    if (handle->spi_init() != 0)                                       /* spi init */
     { 
         handle->debug_print("max31865: spi init failed.\n");           /* spi init failed */
        
@@ -186,7 +184,7 @@ uint8_t max31865_init(max31865_handle_t *handle)
  */
 uint8_t max31865_deinit(max31865_handle_t *handle)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                            /* check handle */
     {
@@ -198,7 +196,7 @@ uint8_t max31865_deinit(max31865_handle_t *handle)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                              /* read config */
-    if (res)
+    if (res != 0)                                                                                  /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                           /* read failed */
         
@@ -206,13 +204,13 @@ uint8_t max31865_deinit(max31865_handle_t *handle)
     }
     prev &= ~(1 << 7);                                                                             /* clear flag */
     res = handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
-    if (res)                                                                                       /* check result */
+    if (res != 0)                                                                                  /* check result */
     {
         handle->debug_print("max31856: write failed.\n");                                          /* write failed */
         
         return 4;                                                                                  /* return error */
     }
-    if (handle->spi_deinit())                                                                      /* spi deinit */
+    if (handle->spi_deinit() != 0)                                                                 /* spi deinit */
     {
         handle->debug_print("max31856: spi deinit failed.\n");                                     /* spi deinit failed */
         
@@ -236,7 +234,7 @@ uint8_t max31865_deinit(max31865_handle_t *handle)
  */
 uint8_t max31865_set_filter_select(max31865_handle_t *handle, max31865_filter_select_t filter)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -248,7 +246,7 @@ uint8_t max31865_set_filter_select(max31865_handle_t *handle, max31865_filter_se
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
        
@@ -273,7 +271,7 @@ uint8_t max31865_set_filter_select(max31865_handle_t *handle, max31865_filter_se
  */
 uint8_t max31865_get_filter_select(max31865_handle_t *handle, max31865_filter_select_t *filter)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                      /* check handle */
     {
@@ -285,7 +283,7 @@ uint8_t max31865_get_filter_select(max31865_handle_t *handle, max31865_filter_se
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
-    if (res)
+    if (res != 0)                                                            /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                     /* read failed */
        
@@ -310,7 +308,7 @@ uint8_t max31865_get_filter_select(max31865_handle_t *handle, max31865_filter_se
  */
 uint8_t max31865_set_wire(max31865_handle_t *handle, max31865_wire_t wire)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -322,7 +320,7 @@ uint8_t max31865_set_wire(max31865_handle_t *handle, max31865_wire_t wire)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)                                                                                        /* check result */
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
         
@@ -347,7 +345,7 @@ uint8_t max31865_set_wire(max31865_handle_t *handle, max31865_wire_t wire)
  */
 uint8_t max31865_get_wire(max31865_handle_t *handle, max31865_wire_t *wire)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                      /* check handle */
     {
@@ -359,7 +357,7 @@ uint8_t max31865_get_wire(max31865_handle_t *handle, max31865_wire_t *wire)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
-    if (res)                                                                 /* check result */
+    if (res != 0)                                                            /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                     /* read failed */
         
@@ -435,18 +433,18 @@ uint8_t max31865_get_reference_resistor(max31865_handle_t *handle, float *value)
  */
 uint8_t max31865_set_resistor(max31865_handle_t *handle, max31865_resistor_t resistor) 
 {
-    if (handle == NULL)                 /* check handle */
+    if (handle == NULL)                          /* check handle */
     {
-        return 2;                       /* return error */
+        return 2;                                /* return error */
     }
-    if (handle->inited != 1)            /* check handle initialization */
+    if (handle->inited != 1)                     /* check handle initialization */
     {
-        return 3;                       /* return error */
+        return 3;                                /* return error */
     }
     
-    handle->resistor = resistor;        /* set resistor */
+    handle->resistor = (uint8_t)resistor;        /* set resistor */
     
-    return 0;                           /* success return 0 */
+    return 0;                                    /* success return 0 */
 }
 
 /**
@@ -488,7 +486,7 @@ uint8_t max31865_get_resistor(max31865_handle_t *handle, max31865_resistor_t *re
  */
 uint8_t max31865_set_vbias(max31865_handle_t *handle, max31865_bool_t enable) 
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -500,7 +498,7 @@ uint8_t max31865_set_vbias(max31865_handle_t *handle, max31865_bool_t enable)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)                                                                                        /* check result */
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
         
@@ -525,7 +523,7 @@ uint8_t max31865_set_vbias(max31865_handle_t *handle, max31865_bool_t enable)
  */
 uint8_t max31865_get_vbias(max31865_handle_t *handle, max31865_bool_t *enable) 
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                      /* check handle */
     {
@@ -537,7 +535,7 @@ uint8_t max31865_get_vbias(max31865_handle_t *handle, max31865_bool_t *enable)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
-    if (res)                                                                 /* check result */
+    if (res != 0)                                                            /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                     /* read failed */
         
@@ -561,7 +559,7 @@ uint8_t max31865_get_vbias(max31865_handle_t *handle, max31865_bool_t *enable)
  */
 uint8_t max31865_clear_fault_status(max31865_handle_t *handle) 
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -573,7 +571,7 @@ uint8_t max31865_clear_fault_status(max31865_handle_t *handle)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
        
@@ -623,7 +621,7 @@ uint8_t max31865_get_fault_status(max31865_handle_t *handle, uint8_t *status)
  */
 uint8_t max31865_set_high_fault_threshold(max31865_handle_t *handle, uint16_t threshold) 
 {
-    volatile uint8_t buf[2];
+    uint8_t buf[2];
     
     if (handle == NULL)                                                                                   /* check handle */
     {
@@ -635,8 +633,8 @@ uint8_t max31865_set_high_fault_threshold(max31865_handle_t *handle, uint16_t th
     }
     
     threshold = threshold << 1;                                                                           /* left shift 1 */
-    buf[0] = (threshold >> 8) & 0xFF;                                                                     /* set msb */
-    buf[1] = threshold & 0xFF;                                                                            /* set lsb */
+    buf[0] = (uint8_t)((threshold >> 8) & 0xFF);                                                          /* set msb */
+    buf[1] = (uint8_t)(threshold & 0xFF);                                                                 /* set lsb */
     
     return handle->spi_write(MAX31856_REG_HIGH_FAULT_MSB | WRITE_ADDRESS_MASK, (uint8_t *)buf, 2);        /* write fault threshold */
 }
@@ -654,8 +652,8 @@ uint8_t max31865_set_high_fault_threshold(max31865_handle_t *handle, uint16_t th
  */
 uint8_t max31865_get_high_fault_threshold(max31865_handle_t *handle, uint16_t *threshold)
 {
-    volatile uint8_t res;
-    volatile uint8_t buf[2];
+    uint8_t res;
+    uint8_t buf[2];
     
     if (handle == NULL)                                                              /* check handle */
     {
@@ -667,13 +665,13 @@ uint8_t max31865_get_high_fault_threshold(max31865_handle_t *handle, uint16_t *t
     }
     
     res = handle->spi_read(MAX31856_REG_HIGH_FAULT_MSB, (uint8_t *)buf, 2);          /* get fault msb */
-    if (res)
+    if (res != 0)                                                                    /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                             /* read failed */
        
         return 1;                                                                    /* return error */
     }
-    *threshold = (uint16_t)(buf[0] << 8) | buf[1];                                   /* get raw */
+    *threshold = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                       /* get raw */
     *threshold = (*threshold) >> 1;                                                  /* get data */
 
     return 0;                                                                        /* success return 0 */
@@ -692,7 +690,7 @@ uint8_t max31865_get_high_fault_threshold(max31865_handle_t *handle, uint16_t *t
  */
 uint8_t max31865_set_low_fault_threshold(max31865_handle_t *handle, uint16_t threshold) 
 {
-    volatile uint8_t buf[2];
+    uint8_t buf[2];
     
     if (handle == NULL)                                                                                  /* check handle */
     {
@@ -704,8 +702,8 @@ uint8_t max31865_set_low_fault_threshold(max31865_handle_t *handle, uint16_t thr
     }
     
     threshold = threshold << 1;                                                                          /* left shift 1 */
-    buf[0] = (threshold >> 8) & 0xFF;                                                                    /* set msb */
-    buf[1] = threshold & 0xFF;                                                                           /* set lsb */
+    buf[0] = (uint8_t)((threshold >> 8) & 0xFF);                                                         /* set msb */
+    buf[1] = (uint8_t)(threshold & 0xFF);                                                                /* set lsb */
     
     return handle->spi_write(MAX31856_REG_LOW_FAULT_MSB | WRITE_ADDRESS_MASK, (uint8_t *)buf, 2);        /* write config */
 }
@@ -723,8 +721,8 @@ uint8_t max31865_set_low_fault_threshold(max31865_handle_t *handle, uint16_t thr
  */
 uint8_t max31865_get_low_fault_threshold(max31865_handle_t *handle, uint16_t *threshold) 
 {
-    volatile uint8_t res;
-    volatile uint8_t buf[2];
+    uint8_t res;
+    uint8_t buf[2];
     
     if (handle == NULL)                                                           /* check handle */
     {
@@ -736,13 +734,13 @@ uint8_t max31865_get_low_fault_threshold(max31865_handle_t *handle, uint16_t *th
     }
     
     res = handle->spi_read(MAX31856_REG_LOW_FAULT_MSB, (uint8_t *)buf, 2);        /* write low fault msb */
-    if (res)                                                                      /* check result */
+    if (res != 0)                                                                 /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                          /* read failed */
         
         return 1;                                                                 /* return error */
     }
-    *threshold = (uint16_t)(buf[0] << 8) | buf[1];                                /* get raw */
+    *threshold = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                    /* get raw */
     *threshold = (*threshold) >> 1;                                               /* get data */
     
     return 0;                                                                     /* success return 0 */
@@ -761,7 +759,7 @@ uint8_t max31865_get_low_fault_threshold(max31865_handle_t *handle, uint16_t *th
  */
 uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, max31865_fault_detection_cycle_control_t control) 
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -773,7 +771,7 @@ uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, ma
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)                                                                                        /* check result */
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
        
@@ -798,7 +796,7 @@ uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, ma
  */
 uint8_t max31865_get_fault_detection_cycle_control(max31865_handle_t *handle, max31865_fault_detection_cycle_control_status_t *status)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                            /* check handle */
     {
@@ -810,7 +808,7 @@ uint8_t max31865_get_fault_detection_cycle_control(max31865_handle_t *handle, ma
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);              /* read config */
-    if (res)                                                                       /* check result */
+    if (res != 0)                                                                  /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                           /* read failed */
        
@@ -837,10 +835,10 @@ uint8_t max31865_get_fault_detection_cycle_control(max31865_handle_t *handle, ma
  */
 uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *temp)
 {
-    volatile uint8_t res, prev;
-    volatile uint8_t buf[2];
-    volatile float resistor;
-    volatile uint16_t times;
+    uint8_t res, prev;
+    uint8_t buf[2];
+    float resistor;
+    uint16_t times;
     
     if (handle == NULL)                                                                               /* check handle */
     {
@@ -852,7 +850,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                                 /* read config */
-    if (res)                                                                                          /* check result */
+    if (res != 0)                                                                                     /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                              /* read failed */
        
@@ -863,18 +861,18 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     prev &= ~(1 << 6);                                                                                /* set normally off */
     prev |= 1 << 5;                                                                                   /* set shot */
     res = handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);           /* write config */
-    if (res)                                                                                          /* check result */
+    if (res != 0)                                                                                     /* check result */
     {
         handle->debug_print("max31856: write failed.\n");                                             /* write failed */
        
         return 1;                                                                                     /* return error */
     }
     times = 5000;                                                                                     /* set retry times */
-    while (prev & (1 << 5) && times)                                                                  /* check retry times */
+    while (((prev & (1 << 5)) != 0) && (times != 0))                                                  /* check retry times */
     {
         handle->delay_ms(63);                                                                         /* delay 63 ms */
         res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                             /* read config */
-        if (res)                                                                                      /* check result */
+        if (res != 0)                                                                                 /* check result */
         {
             handle->debug_print("max31856: read failed.\n");                                          /* read failed */
            
@@ -888,15 +886,16 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
             return 1;                                                                                 /* return error */
         }
     }
+    memset(buf, 0, sizeof(uint8_t) * 2);                                                              /* clear the buffer */
     res = handle->spi_read(MAX31856_REG_RTD_MSB, (uint8_t *)buf, 2);                                  /* read rtd msb */
-    if (res)                                                                                          /* check result */
+    if (res != 0)                                                                                     /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                              /* read failed */
        
         return 1;                                                                                     /* return error */
     }
-    *raw = (uint16_t)(buf[0] << 8) | buf[1];                                                          /* get raw data */
-    if ((*raw) & 0x01)
+    *raw = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                                              /* get raw data */
+    if (((*raw) & 0x01) != 0)
     {
         handle->debug_print("max31856: find rtd fault.\n");                                           /* find rtd fault */
        
@@ -914,7 +913,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     {
         resistor = 1000.0f;                                                                           /* set resistor type 1000 */
     }
-    *temp = _max31865_temperature_conversion((float)(*raw), resistor, handle->ref_resistor);          /* calculate temperature */
+    *temp = a_max31865_temperature_conversion((float)(*raw), resistor, handle->ref_resistor);         /* calculate temperature */
     
     return 0;                                                                                         /* success return 0 */
 }
@@ -931,7 +930,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
  */
 uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -942,8 +941,9 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
         return 3;                                                                                   /* return error */
     }
     
+    handle->delay_ms(10);                                                                           /* delay 10 ms */
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)                                                                                        /* check result */
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
        
@@ -969,7 +969,7 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
  */
 uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
 {
-    volatile uint8_t res, prev;
+    uint8_t res, prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -981,7 +981,7 @@ uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
     }
     
     res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
-    if (res)                                                                                        /* check result */
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
        
@@ -1010,9 +1010,9 @@ uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
  */
 uint8_t max31865_continuous_read(max31865_handle_t *handle, uint16_t *raw, float *temp)
 {
-    volatile uint8_t res;
-    volatile uint8_t buf[2];
-    volatile float resistor;
+    uint8_t res;
+    uint8_t buf[2];
+    float resistor;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -1023,15 +1023,16 @@ uint8_t max31865_continuous_read(max31865_handle_t *handle, uint16_t *raw, float
         return 3;                                                                                   /* return error */
     }
     
+    memset(buf, 0, sizeof(uint8_t) * 2);                                                            /* clear the buffer */
     res = handle->spi_read(MAX31856_REG_RTD_MSB, (uint8_t *)buf, 2);                                /* read rtd msb */
-    if (res)                                                                                        /* check result */
+    if (res != 0)                                                                                   /* check result */
     {
         handle->debug_print("max31856: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
-    *raw = (uint16_t)(buf[0] << 8) | buf[1];                                                        /* get raw data */
-    if ((*raw) & 0x01)                                                                              /* check error */
+    *raw = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                                            /* get raw data */
+    if (((*raw) & 0x01) != 0)                                                                       /* check error */
     {
         handle->debug_print("max31856: find rtd fault.\n");                                         /* find rtd fault */
        
@@ -1049,7 +1050,7 @@ uint8_t max31865_continuous_read(max31865_handle_t *handle, uint16_t *raw, float
     {
         resistor = 1000.0f;                                                                         /* set resistor type 1000 */
     }
-    *temp = _max31865_temperature_conversion((float)(*raw), resistor, handle->ref_resistor);        /* calculate */
+    *temp = a_max31865_temperature_conversion((float)(*raw), resistor, handle->ref_resistor);       /* calculate */
     
     return 0;                                                                                       /* success return 0 */
 }

@@ -128,10 +128,10 @@ uint8_t max31865(uint8_t argc, char **argv)
             /* reg test */
             if (strcmp("reg", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 
                 res = max31865_register_test();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
@@ -158,7 +158,7 @@ uint8_t max31865(uint8_t argc, char **argv)
             /* read test */
             if (strcmp("read", argv[2]) == 0)
             {
-                volatile uint8_t res;
+                uint8_t res;
                 max31865_wire_t wire;
                 max31865_resistor_t type;
                 
@@ -207,8 +207,8 @@ uint8_t max31865(uint8_t argc, char **argv)
                     return 5;
                 }
                 
-                res = max31865_read_test(wire, type, atof(argv[9]), atoi(argv[3]));
-                if (res)
+                res = max31865_read_test(wire, type, (float)atof(argv[9]), atoi(argv[3]));
+                if (res != 0)
                 {
                     return 1;
                 }
@@ -227,9 +227,9 @@ uint8_t max31865(uint8_t argc, char **argv)
              /* read function */
             if (strcmp("read", argv[2]) == 0)
             {
-                volatile uint8_t res;
-                volatile uint32_t i, times;
-                volatile float temp;
+                uint8_t res;
+                uint32_t i, times;
+                float temp;
                 max31865_wire_t wire;
                 max31865_resistor_t type;
                 
@@ -278,18 +278,18 @@ uint8_t max31865(uint8_t argc, char **argv)
                     return 5;
                 }
                 
-                res = max31865_basic_init(wire, type, atof(argv[9]));
-                if (res)
+                res = max31865_basic_init(wire, type, (float)atof(argv[9]));
+                if (res != 0)
                 {
                     return 1;
                 }
                 times = atoi(argv[3]);
-                for (i=0; i<times; i++)
+                for (i = 0; i < times; i++)
                 {
                     res = max31865_basic_read((float *)&temp);
-                    if (res)
+                    if (res != 0)
                     {
-                        max31865_basic_deinit();
+                        (void)max31865_basic_deinit();
                         
                         return 1;
                     }
@@ -297,16 +297,16 @@ uint8_t max31865(uint8_t argc, char **argv)
                     max31865_interface_debug_print("max31865: temperature is %0.4fC.\n", temp);
                     max31865_interface_delay_ms(1000);
                 }
-                max31865_basic_deinit();
+                (void)max31865_basic_deinit();
                 
                 return 0;
             }
             /* shot function */
             else if (strcmp("shot", argv[2]) == 0)
             {
-                volatile uint8_t res;
-                volatile uint32_t i, times;
-                volatile float temp;
+                uint8_t res;
+                uint32_t i, times;
+                float temp;
                 max31865_wire_t wire;
                 max31865_resistor_t type;
                 
@@ -355,18 +355,18 @@ uint8_t max31865(uint8_t argc, char **argv)
                     return 5;
                 }
                 
-                res = max31865_shot_init(wire, type, atof(argv[9]));
-                if (res)
+                res = max31865_shot_init(wire, type, (float)atof(argv[9]));
+                if (res != 0)
                 {
                     return 1;
                 }
                 times = atoi(argv[3]);
-                for (i=0; i<times; i++)
+                for (i = 0; i < times; i++)
                 {
                     res = max31865_shot_read((float *)&temp);
-                    if (res)
+                    if (res != 0)
                     {
-                        max31865_basic_deinit();
+                        (void)max31865_basic_deinit();
                         
                         return 1;
                     }
@@ -374,7 +374,7 @@ uint8_t max31865(uint8_t argc, char **argv)
                     max31865_interface_debug_print("max31865: temperature is %0.4fC.\n", temp);
                     max31865_interface_delay_ms(1000);
                 }
-                max31865_shot_deinit();
+                (void)max31865_shot_deinit();
                 
                 return 0;
             }
@@ -403,7 +403,7 @@ uint8_t max31865(uint8_t argc, char **argv)
  */
 int main(void)
 {
-    volatile uint8_t res;
+    uint8_t res;
     
     /* stm32f407 clock init and hal init */
     clock_init();
