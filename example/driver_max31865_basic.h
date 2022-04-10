@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_MAX31865_BASIC_H_
-#define _DRIVER_MAX31865_BASIC_H_
+#ifndef DRIVER_MAX31865_BASIC_H
+#define DRIVER_MAX31865_BASIC_H
 
 #include "driver_max31865_interface.h"
 
@@ -56,8 +56,8 @@ extern "C"{
  */
 #define MAX31865_BASIC_DEFAULT_FILTER_SELECT                    MAX31865_FILTER_SELECT_50HZ                                   /**< filter select 50Hz */
 #define MAX31865_BASIC_DEFAULT_FAULT_DETECTION_CYCLE_CONTROL    MAX31865_FAULT_DETECTION_CYCLE_CONTROL_AUTOMATIC_DELAY        /**< automatic delay */
-#define MAX31865_BASIC_DEFAULT_HIGH_FAULT_THRESHOLD             0xFFFE                                                        /**< high fault threshold */
-#define MAX31865_BASIC_DEFAULT_LOW_FAULT_THRESHOLD              0x0000                                                        /**< low fault threshold */
+#define MAX31865_BASIC_DEFAULT_HIGH_FAULT_THRESHOLD             0xFFFEU                                                       /**< high fault threshold */
+#define MAX31865_BASIC_DEFAULT_LOW_FAULT_THRESHOLD              0x0000U                                                       /**< low fault threshold */
 
 /**
  * @brief     basic example init

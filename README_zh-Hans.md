@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver MAX31865
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/max31865/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/max31865/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 MAX31865是简单易用的热敏电阻至数字输出转换器，优化用于铂电阻温度检测器(RTD)。外部电阻设置RTD灵敏度，高精度Δ- Σ ADC将RTD电阻与基准电阻之比转换为数字输出。MAX31865输入具有高达±45V的过压保护，提供可配置的RTD及电缆开路、短路条件检测。MAX31865被用于工业设备、仪表和医疗装置等领域。
 
-LibDriver MAX31865是LibDriver推出的MAX31865的全功能驱动，该驱动提供PT温度连续模式读取、PT温度单次模式读取等功能。
+LibDriver MAX31865是LibDriver推出的MAX31865的全功能驱动，该驱动提供PT温度连续模式读取、PT温度单次模式读取等功能并且它符合MISRA标准。
 
 ### 目录
 
