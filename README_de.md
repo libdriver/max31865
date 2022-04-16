@@ -55,7 +55,7 @@ uint8_t i;
 float temp;
 
 res = max31865_basic_init(MAX31865_WIRE_4, MAX31865_RESISTOR_1000PT, 430.f);
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -65,9 +65,9 @@ if (res)
 for (i = 0; i < 3; i++)
 {
     res = max31865_basic_read((float *)&temp);
-    if (res)
+    if (res != 0)
     {
-        max31865_basic_deinit();
+        (void)max31865_basic_deinit();
 
         return 1;
     }
@@ -80,7 +80,7 @@ for (i = 0; i < 3; i++)
 
 ...
 
-max31865_basic_deinit();
+(void)max31865_basic_deinit();
 
 return 0;
 ```
@@ -93,7 +93,7 @@ uint8_t i;
 float temp;
 
 res = max31865_shot_init(MAX31865_WIRE_4, MAX31865_RESISTOR_1000PT, 430.f);
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -103,9 +103,9 @@ if (res)
 for (i = 0; i < 3; i++)
 {
     res = max31865_shot_read((float *)&temp);
-    if (res)
+    if (res != 0)
     {
-        max31865_basic_deinit();
+        (void)max31865_shot_deinit();
 
         return 1;
     }
@@ -118,7 +118,7 @@ for (i = 0; i < 3; i++)
 
 ...
 
-max31865_shot_deinit();
+(void)max31865_shot_deinit();
 
 return 0;
 ```
