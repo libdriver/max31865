@@ -356,7 +356,7 @@ uint8_t max31865(uint8_t argc, char **argv)
                     res = max31865_shot_read((float *)&temp);
                     if (res != 0)
                     {
-                        (void)max31865_basic_deinit();
+                        (void)max31865_shot_deinit();
                         
                         return 1;
                     }
