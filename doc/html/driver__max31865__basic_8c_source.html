@@ -220,21 +220,19 @@ $(document).ready(function(){initNavTree('driver__max31865__basic_8c_source.html
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    res = <a class="code" href="group__max31865__base__driver.html#gab9b36a6b003d01ac6779b6820d10783b">max31865_stop_continuous_read</a>(&amp;gs_handle);</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span> (res != 0)</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    {</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <a class="code" href="group__max31865__interface__driver.html#gafd695b040505e1aef8acfc8588943af4">max31865_interface_debug_print</a>(<span class="stringliteral">&quot;max31865: stop continuous read failed.\n&quot;</span>);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">/* deinit */</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="group__max31865__base__driver.html#gafadf78bcb06cd7e0efa9372dbd1208cd">max31865_deinit</a>(&amp;gs_handle) != 0)</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    {</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    }</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">/* deinit */</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="group__max31865__base__driver.html#gafadf78bcb06cd7e0efa9372dbd1208cd">max31865_deinit</a>(&amp;gs_handle) != 0)</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;}</div>
 <div class="ttc" id="adriver__max31865__basic_8h_html"><div class="ttname"><a href="driver__max31865__basic_8h.html">driver_max31865_basic.h</a></div><div class="ttdoc">driver max31865 basic header file</div></div>
 <div class="ttc" id="agroup__max31865__base__driver_html_ga0775b1cd58076157947aa47a428b84db"><div class="ttname"><a href="group__max31865__base__driver.html#ga0775b1cd58076157947aa47a428b84db">max31865_set_low_fault_threshold</a></div><div class="ttdeci">uint8_t max31865_set_low_fault_threshold(max31865_handle_t *handle, uint16_t threshold)</div><div class="ttdoc">set the low fault threshold</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865_8c_source.html#l00691">driver_max31865.c:691</a></div></div>
 <div class="ttc" id="agroup__max31865__base__driver_html_ga23b453006f95056aec7acd2c5294007c"><div class="ttname"><a href="group__max31865__base__driver.html#ga23b453006f95056aec7acd2c5294007c">max31865_set_wire</a></div><div class="ttdeci">uint8_t max31865_set_wire(max31865_handle_t *handle, max31865_wire_t wire)</div><div class="ttdoc">set the pt resistor wire</div><div class="ttdef"><b>Definition:</b> <a href="driver__max31865_8c_source.html#l00309">driver_max31865.c:309</a></div></div>

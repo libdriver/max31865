@@ -192,8 +192,6 @@ uint8_t max31865_basic_deinit(void)
     res = max31865_stop_continuous_read(&gs_handle);
     if (res != 0)
     {
-        max31865_interface_debug_print("max31865: stop continuous read failed.\n");
-        
         return 1;
     }
     
