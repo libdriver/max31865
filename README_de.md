@@ -27,15 +27,15 @@ LibDriver MAX31865 ist der Treiber mit vollem Funktionsumfang von MAX31865, der 
 
 /src enthält LibDriver MAX31865-Quelldateien.
 
-/interface enthält die plattformunabhängige Vorlage LibDriver MAX31865 SPI。
+/interface enthält die plattformunabhängige Vorlage LibDriver MAX31865 SPI.
 
-/test enthält den Testcode des LibDriver MAX31865-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen。
+/test enthält den Testcode des LibDriver MAX31865-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen.
 
 /example enthält LibDriver MAX31865-Beispielcode.
 
 /doc enthält das LibDriver MAX31865-Offlinedokument.
 
-/Datenblatt enthält MAX31865-Datenblatt。
+/Datenblatt enthält MAX31865-Datenblatt.
 
 /project enthält den allgemeinen Beispielcode für Linux- und MCU-Entwicklungsboards. Alle Projekte verwenden das Shell-Skript, um den Treiber zu debuggen, und die detaillierten Anweisungen finden Sie in der README.md jedes Projekts.
 
