@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>5</fileVersion>
-    <fileChecksum>3387261727</fileChecksum>
+    <fileChecksum>1954169299</fileChecksum>
     <configuration>
         <name>Release</name>
         <outputs>
-            <file>$PROJ_DIR$\..\interface\src\delay.c</file>
-            <file>$PROJ_DIR$\..\interface\src\clock.c</file>
-            <file>$PROJ_DIR$\..\interface\src\spi.c</file>
-            <file>$PROJ_DIR$\..\interface\src\uart.c</file>
-            <file>$PROJ_DIR$\..\..\..\example\driver_max31865_basic.c</file>
-            <file>$PROJ_DIR$\..\..\..\src\driver_max31865.c</file>
-            <file>$PROJ_DIR$\..\..\..\example\driver_max31865_shot.c</file>
-            <file>$PROJ_DIR$\..\driver\src\stm32f407_driver_max31865_interface.c</file>
-            <file>$PROJ_DIR$\..\..\..\test\driver_max31865_read_test.c</file>
-            <file>$PROJ_DIR$\..\..\..\test\driver_max31865_register_test.c</file>
+            <file>$PROJ_DIR$\..\hal\asm\startup_stm32f407xx_ew.s</file>
         </outputs>
         <forcedrebuild>
             <name>[REBUILD_ALL]</name>
