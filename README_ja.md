@@ -51,6 +51,8 @@ LibDriver MAX31865は、LibDriverによって起動されたMAX31865の全機能
 #### example basic
 
 ```C
+#include "driver_max31865_basic.h"
+
 uint8_t res;
 uint8_t i;
 float temp;
@@ -89,6 +91,8 @@ return 0;
 #### example shot
 
 ```C
+#include "driver_max31865_shot.h"
+
 uint8_t res;
 uint8_t i;
 float temp;

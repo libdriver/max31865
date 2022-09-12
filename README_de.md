@@ -50,6 +50,8 @@ Fügen Sie /src, /interface und /example zu Ihrem Projekt hinzu.
 #### example basic
 
 ```C
+#include "driver_max31865_basic.h"
+
 uint8_t res;
 uint8_t i;
 float temp;
@@ -88,6 +90,8 @@ return 0;
 #### example shot
 
 ```C
+#include "driver_max31865_shot.h"
+
 uint8_t res;
 uint8_t i;
 float temp;
