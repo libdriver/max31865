@@ -28,15 +28,15 @@ LibDriver MAX31865 is the full function driver of MAX31865 launched by LibDriver
 
 /src includes LibDriver MAX31865 source files.
 
-/interface includes LibDriver MAX31865 SPI platform independent template。
+/interface includes LibDriver MAX31865 SPI platform independent template.
 
-/test includes LibDriver MAX31865 driver test code and this code can test the chip necessary function simply。
+/test includes LibDriver MAX31865 driver test code and this code can test the chip necessary function simply.
 
 /example includes LibDriver MAX31865 sample code.
 
 /doc includes LibDriver MAX31865 offline document.
 
-/datasheet includes MAX31865 datasheet。
+/datasheet includes MAX31865 datasheet.
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
@@ -51,6 +51,8 @@ Add /src, /interface and /example to your project.
 #### example basic
 
 ```C
+#include "driver_max31865_basic.h"
+
 uint8_t res;
 uint8_t i;
 float temp;
@@ -89,6 +91,8 @@ return 0;
 #### example shot
 
 ```C
+#include "driver_max31865_shot.h"
+
 uint8_t res;
 uint8_t i;
 float temp;
