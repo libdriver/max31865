@@ -79,7 +79,7 @@ uint8_t max31865_read_test(max31865_wire_t wire, max31865_resistor_t type, float
         max31865_interface_debug_print("max31865: chip is %s.\n", info.chip_name);
         max31865_interface_debug_print("max31865: manufacturer is %s.\n", info.manufacturer_name);
         max31865_interface_debug_print("max31865: interface is %s.\n", info.interface);
-        max31865_interface_debug_print("max31865: driver version is %d.%d.\n", info.driver_version/1000, (info.driver_version%1000)/100);
+        max31865_interface_debug_print("max31865: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
         max31865_interface_debug_print("max31865: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
         max31865_interface_debug_print("max31865: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
         max31865_interface_debug_print("max31865: max current is %0.2fmA.\n", info.max_current_ma);

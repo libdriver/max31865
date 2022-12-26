@@ -2,51 +2,85 @@
 
 #### 1.1 Chip Info
 
-chip name : STM32F407ZGT6.
+Chip Name: STM32F407ZGT6.
 
-extern oscillator : 8MHz.
+Extern Oscillator: 8MHz.
 
-uart pin: TX/RX PA9/PA10.
+UART Pin: TX/RX PA9/PA10.
 
-spi pin: SCK/MISO/MOSI/CS  PA5/PA6/PA7/PA4.
+SPI Pin: SCK/MISO/MOSI/CS  PA5/PA6/PA7/PA4.
 
-### 2. Shell
+### 2. Development and Debugging
 
-#### 2.1 Shell Parameter
+#### 2.1 Integrated Development Environment
 
-baud rate: 115200.
+LidDriver provides both Keil and IAR integrated development environment projects.
 
-data bits : 8.
+MDK is the Keil ARM project and your Keil version must be 5 or higher.Keil ARM project needs STMicroelectronics STM32F4 Series Device Family Pack and you can download from https://www.keil.com/dd2/stmicroelectronics/stm32f407zgtx.
 
-stop bits: 1.
+EW is the IAR ARM project and your IAR version must be 9 or higher.
 
-parity: none.
+#### 2.2 Serial Port Parameter
 
-flow control: none.
+Baud Rate: 115200.
+
+Data Bits : 8.
+
+Stop Bits: 1.
+
+Parity: None.
+
+Flow Control: None.
+
+#### 2.3 Serial Port Assistant
+
+We use '\n' to wrap lines.If your serial port assistant displays exceptions (e.g. the displayed content does not divide lines), please modify the configuration of your serial port assistant or replace one that supports '\n' parsing.
 
 ### 3. MAX31865
 
 #### 3.1 Command Instruction
 
-​          max31865 is a basic command which can test all max31865 driver function:
+1. Show max31865 chip and driver information.
 
-​           -i        show max31865 chip and driver information.
+   ```shell
+   max31865 (-i | --information)
+   ```
 
-​           -h       show max31865 help.
+2. Show max31865 help.
 
-​           -p       show max31865 pin connections of the current board.
+   ```shell
+   max31865 (-h | --help)
+   ```
 
-​           -t (reg | read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>)
+3. Show max31865 pin connections of the current board.
 
-​           -t  reg        run max31865 register test.
+   ```shell
+   max31865 (-p | --port)
+   ```
 
-​           -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>        run max31865 read test. times means test times. resistor means reference resistor.
+4. Run max31865 register test.
 
-​           -c (read  <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor> | shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>)
+   ```shell
+   max31865 (-t reg | --test=reg)
+   ```
 
-​           -c read  <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>        run max31865 read function. times means test times. resistor means reference resistor.
+5. Run max31865 read test, num means test times, r means reference resistor.
 
-​           -c shot  <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>        run max31865 shot function. times means test times. resistor means reference resistor.
+   ```shell
+   max31865 (-t read | --test=read) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>] [--resistor=<r>] [--times=<num>]
+   ```
+
+6. Run max31865 read function, num means test times, r means reference resistor.
+
+   ```shell
+   max31865 (-e read | --example=read) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>] [--resistor=<r>] [--times=<num>]
+   ```
+
+7. Run max31865 shot function, num means test times, r means reference resistor.
+
+   ```shell
+   max31865 (-e shot | --example=shot) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>] [--resistor=<r>] [--times=<num>]
+   ```
 
 #### 3.2 Command Example
 
@@ -130,7 +164,7 @@ max31865: finish register test.
 ```
 
 ```shell
-max31865 -t read 3 -wire 4 -type 100 -r 430.0
+max31865 -t read --wire=4 --type=100 --resistor=430.0 --times=3
 
 max31865: chip is Maxim Integrated MAX31865.
 max31865: manufacturer is Maxim Integrated.
@@ -143,54 +177,63 @@ max31865: max temperature is 85.0C.
 max31865: min temperature is -40.0C.
 max31865: start read test.
 max31865: continuous read test test.
-max31865: continuous read 27.66C.
-max31865: continuous read 27.73C.
-max31865: continuous read 27.80C.
+max31865: continuous read 31.12C.
+max31865: continuous read 31.19C.
+max31865: continuous read 31.22C.
 max31865: single read test.
-max31865: single read 27.70C.
-max31865: single read 27.73C.
-max31865: single read 27.83C.
+max31865: single read 31.12C.
+max31865: single read 31.19C.
+max31865: single read 31.22C.
 max31865: finish read test.
 ```
 
 ```shell
-max31865 -c read 3 -wire 4 -type 100 -r 430.0
+max31865 -e read --wire=4 --type=100 --resistor=430.0 --times=3
 
 max31865: 1/3.
-max31865: temperature is 27.8326C.
+max31865: temperature is 31.2199C.
 max31865: 2/3.
-max31865: temperature is 27.8326C.
+max31865: temperature is 30.9828C.
 max31865: 3/3.
-max31865: temperature is 27.8326C.
+max31865: temperature is 31.0505C.
 ```
 
 ```shell
-max31865 -c shot 3 -wire 4 -type 100 -r 430.0
+max31865 -e shot --wire=4 --type=100 --resistor=430.0 --times=3
 
 max31865: 1/3.
-max31865: temperature is 27.8326C.
+max31865: temperature is 31.0505C.
 max31865: 2/3.
-max31865: temperature is 27.9680C.
+max31865: temperature is 31.0505C.
 max31865: 3/3.
-max31865: temperature is 28.0019C.
+max31865: temperature is 31.0823C.
 ```
 
 ```shell
 max31865 -h
 
-max31865 -i
-	show max31865 chip and driver information.
-max31865 -h
-	show max31865 help.
-max31865 -p
-	show max31865 pin connections of the current board.
-max31865 -t reg
-	run max31865 register test.
-max31865 -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
-	run max31865 read test.times means test times.resistor means reference resistor.
-max31865 -c read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
-	run max31865 read function.times means test times.resistor means reference resistor.
-max31865 -c shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>
-	run max31865 shot function.times means test times.resistor means reference resistor.
+Usage:
+  max31865 (-i | --information)
+  max31865 (-h | --help)
+  max31865 (-p | --port)
+  max31865 (-t reg | --test=reg)
+  max31865 (-t read | --test=read) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>]
+           [--resistor=<r>] [--times=<num>]
+  max31865 (-e read | --example=read) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>]
+           [--resistor=<r>] [--times=<num>]
+  max31865 (-e shot | --example=shot) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>]
+           [--resistor=<r>] [--times=<num>]
+
+Options:
+  -e <fifo>, --example=<fifo>    Run the driver example.
+  -h, --help                     Show the help.
+  -i, --information              Show the chip information.
+  -p, --port                     Display the pin connections of the current board.
+      --resistor=<r>             Set the reference resistor.([default: 430.0f])
+  -t <reg | fifo>, --test=<reg | fifo>
+                                 Run the driver test.
+      --type=<100 | 1000>        Set the PT resistor type.([default: 100])
+      --times=<num>              Set the running times.([default: 3])
+      --wire=<2 | 3 | 4>         Set the PT resistor wire.([default: 4])
 ```
 

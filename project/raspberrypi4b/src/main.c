@@ -38,6 +38,7 @@
 #include "driver_max31865_register_test.h"
 #include "driver_max31865_shot.h"
 #include "driver_max31865_basic.h"
+#include <getopt.h>
 #include <stdlib.h>
 
 /**
@@ -52,335 +53,333 @@
  */
 uint8_t max31865(uint8_t argc, char **argv)
 {
+    int c;
+    int longindex = 0;
+    const char short_options[] = "hipe:t:";
+    const struct option long_options[] =
+    {
+        {"help", no_argument, NULL, 'h'},
+        {"information", no_argument, NULL, 'i'},
+        {"port", no_argument, NULL, 'p'},
+        {"example", required_argument, NULL, 'e'},
+        {"test", required_argument, NULL, 't'},
+        {"resistor", required_argument, NULL, 1},
+        {"type", required_argument, NULL, 2},
+        {"times", required_argument, NULL, 3},
+        {"wire", required_argument, NULL, 4},
+        {NULL, 0, NULL, 0},
+    };
+    char type[32] = "unknow";
+    uint32_t times = 3;
+    float r = 430.0f;
+    max31865_resistor_t chip_type = MAX31865_RESISTOR_100PT;
+    max31865_wire_t wire = MAX31865_WIRE_4;
+    
+    /* if no params */
     if (argc == 1)
     {
+        /* goto the help */
         goto help;
     }
-    else if (argc == 2)
+    
+    /* init 0 */
+    optind = 0;
+    
+    /* parse */
+    do
     {
-        if (strcmp("-i", argv[1]) == 0)
+        /* parse the args */
+        c = getopt_long(argc, argv, short_options, long_options, &longindex);
+        
+        /* judge the result */
+        switch (c)
         {
-            max31865_info_t info;
-            
-            /* print max31865 info */
-            max31865_info(&info);
-            max31865_interface_debug_print("max31865: chip is %s.\n", info.chip_name);
-            max31865_interface_debug_print("max31865: manufacturer is %s.\n", info.manufacturer_name);
-            max31865_interface_debug_print("max31865: interface is %s.\n", info.interface);
-            max31865_interface_debug_print("max31865: driver version is %d.%d.\n", info.driver_version/1000, (info.driver_version%1000)/100);
-            max31865_interface_debug_print("max31865: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
-            max31865_interface_debug_print("max31865: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
-            max31865_interface_debug_print("max31865: max current is %0.2fmA.\n", info.max_current_ma);
-            max31865_interface_debug_print("max31865: max temperature is %0.1fC.\n", info.temperature_max);
-            max31865_interface_debug_print("max31865: min temperature is %0.1fC.\n", info.temperature_min);
-            
-            return 0;
-        }
-        else if (strcmp("-p", argv[1]) == 0)
-        {
-            /* print pin connection */
-            max31865_interface_debug_print("max31865: SCK connected to GPIO11(BCM).\n");
-            max31865_interface_debug_print("max31865: MISO connected to GPIO9(BCM).\n");
-            max31865_interface_debug_print("max31865: MOSI connected to GPIO10(BCM).\n");
-            max31865_interface_debug_print("max31865: CS connected to GPIO8(BCM).\n");
-            
-            return 0;
-        }
-        else if (strcmp("-h", argv[1]) == 0)
-        {
-            /* show max31865 help */
-            
-            help:
-            
-            max31865_interface_debug_print("max31865 -i\n\tshow max31865 chip and driver information.\n");
-            max31865_interface_debug_print("max31865 -h\n\tshow max31865 help.\n");
-            max31865_interface_debug_print("max31865 -p\n\tshow max31865 pin connections of the current board.\n");
-            max31865_interface_debug_print("max31865 -t reg\n\trun max31865 register test.\n");
-            max31865_interface_debug_print("max31865 -t read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t"
-                                           "run max31865 read test.times means test times.resistor means reference resistor.\n");
-            max31865_interface_debug_print("max31865 -c read <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t"
-                                           "run max31865 read function.times means test times.resistor means reference resistor.\n");
-            max31865_interface_debug_print("max31865 -c shot <times> -wire (2 | 3 | 4) -type (100 | 1000) -r <resistor>\n\t" 
-                                           "run max31865 shot function.times means test times.resistor means reference resistor.\n");
-            
-            return 0;
-        }
-        else
-        {
-            return 5;
-        }
-    }
-    else if (argc == 3)
-    {
-        /* run test */
-        if (strcmp("-t", argv[1]) == 0)
-        {
-            /* reg test */
-            if (strcmp("reg", argv[2]) == 0)
+            /* help */
+            case 'h' :
             {
-                uint8_t res;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "h");
                 
-                res = max31865_register_test();
-                if (res != 0)
-                {
-                    return 1;
-                }
-                
-                return 0;
+                break;
             }
-            /* param is invalid */
-            else
+            
+            /* information */
+            case 'i' :
             {
-                return 5;
-            }
-        }
-        /* param is invalid */
-        else
-        {
-            return 5;
-        }
-    }
-    else if (argc == 10)
-    {
-        /* run test */
-        if (strcmp("-t", argv[1]) == 0)
-        {
-            /* read test */
-            if (strcmp("read", argv[2]) == 0)
-            {
-                uint8_t res;
-                max31865_wire_t wire;
-                max31865_resistor_t type;
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "i");
                 
-                if (strcmp("-wire", argv[4]) != 0)
+                break;
+            }
+            
+            /* port */
+            case 'p' :
+            {
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "p");
+                
+                break;
+            }
+            
+            /* example */
+            case 'e' :
+            {
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "e_%s", optarg);
+                
+                break;
+            }
+            
+            /* test */
+            case 't' :
+            {
+                /* set the type */
+                memset(type, 0, sizeof(char) * 32);
+                snprintf(type, 32, "t_%s", optarg);
+                
+                break;
+            }
+            
+            /* resistor */
+            case 1 :
+            {
+                /* set the resistor*/
+                r = atof(optarg);
+                
+                break;
+            }
+            
+            /* type */
+            case 2 :
+            {
+                /* set the chip type */
+                if (strcmp("100", optarg) == 0)
+                {
+                    chip_type = MAX31865_RESISTOR_100PT;
+                }
+                else if (strcmp("1000", optarg) == 0)
+                {
+                    chip_type = MAX31865_RESISTOR_1000PT;
+                }
+                else
                 {
                     return 5;
                 }
-                if (strcmp("-type", argv[6]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("-r", argv[8]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("2", argv[5]) == 0)
+                
+                break;
+            }
+            
+            /* running times */
+            case 3 :
+            {
+                /* set the times */
+                times = atol(optarg);
+                
+                break;
+            } 
+            
+            /* wire */
+            case 4 :
+            {
+                /* set the mode */
+                if (strcmp("2", optarg) == 0)
                 {
                     wire = MAX31865_WIRE_2;
                 }
-                else if (strcmp("3", argv[5]) == 0)
+                else if (strcmp("3", optarg) == 0)
                 {
                     wire = MAX31865_WIRE_3;
                 }
-                else if (strcmp("4", argv[5]) == 0)
+                else if (strcmp("4", optarg) == 0)
                 {
                     wire = MAX31865_WIRE_4;
                 }
                 else
                 {
-                    max31865_interface_debug_print("max31865: wire type is invalid.\n");
-                   
-                    return 5;
-                }
-                if (strcmp("100", argv[7]) == 0)
-                {
-                    type = MAX31865_RESISTOR_100PT;
-                }
-                else if (strcmp("1000", argv[7]) == 0)
-                {
-                    type =  MAX31865_RESISTOR_1000PT;
-                }
-                else
-                {
-                    max31865_interface_debug_print("max31865: resistor type is invalid.\n");
-                   
                     return 5;
                 }
                 
-                res = max31865_read_test(wire, type, (float)atof(argv[9]), atoi(argv[3]));
-                if (res != 0)
-                {
-                    return 1;
-                }
-                
-                return 0;
+                break;
             }
-            /* param is invalid */
-            else
+            
+            /* the end */
+            case -1 :
+            {
+                break;
+            }
+            
+            /* others */
+            default :
             {
                 return 5;
             }
         }
-        /* run function */
-        else if (strcmp("-c", argv[1]) == 0)
+    } while (c != -1);
+
+    /* run the function */
+    if (strcmp("t_reg", type) == 0)
+    {
+        uint8_t res;
+        
+        /* run reg test */
+        res = max31865_register_test();
+        if (res != 0)
         {
-             /* read function */
-            if (strcmp("read", argv[2]) == 0)
+            return 1;
+        }
+        
+        return 0;
+    }
+    else if (strcmp("t_read", type) == 0)
+    {
+        uint8_t res;
+        
+        /* run read test */
+        res = max31865_read_test(wire, chip_type, r, times);
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        return 0;
+    }
+    else if (strcmp("e_read", type) == 0)
+    {
+        uint8_t res;
+        uint32_t i;
+        float temp;
+        
+        /* basic init */
+        res = max31865_basic_init(wire, chip_type, r);
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* loop */
+        for (i = 0; i < times; i++)
+        {
+            /* read data */
+            res = max31865_basic_read((float *)&temp);
+            if (res != 0)
             {
-                uint8_t res;
-                uint32_t i, times;
-                float temp;
-                max31865_wire_t wire;
-                max31865_resistor_t type;
-                
-                if (strcmp("-wire", argv[4]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("-type", argv[6]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("-r", argv[8]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("2", argv[5]) == 0)
-                {
-                    wire = MAX31865_WIRE_2;
-                }
-                else if (strcmp("3", argv[5]) == 0)
-                {
-                    wire = MAX31865_WIRE_3;
-                }
-                else if (strcmp("4", argv[5]) == 0)
-                {
-                    wire = MAX31865_WIRE_4;
-                }
-                else
-                {
-                    max31865_interface_debug_print("max31865: wire type is invalid.\n");
-                   
-                    return 5;
-                }
-                if (strcmp("100", argv[7]) == 0)
-                {
-                    type = MAX31865_RESISTOR_100PT;
-                }
-                else if (strcmp("1000", argv[7]) == 0)
-                {
-                    type =  MAX31865_RESISTOR_1000PT;
-                }
-                else
-                {
-                    max31865_interface_debug_print("max31865: resistor type is invalid.\n");
-                   
-                    return 5;
-                }
-                
-                res = max31865_basic_init(wire, type, (float)atof(argv[9]));
-                if (res != 0)
-                {
-                    return 1;
-                }
-                times = atoi(argv[3]);
-                for (i = 0; i < times; i++)
-                {
-                    res = max31865_basic_read((float *)&temp);
-                    if (res != 0)
-                    {
-                        (void)max31865_basic_deinit();
-                        
-                        return 1;
-                    }
-                    max31865_interface_debug_print("max31865: %d/%d.\n", i+1, times);
-                    max31865_interface_debug_print("max31865: temperature is %0.4fC.\n", temp);
-                    max31865_interface_delay_ms(1000);
-                }
                 (void)max31865_basic_deinit();
                 
-                return 0;
+                return 1;
             }
-            /* shot function */
-            else if (strcmp("shot", argv[2]) == 0)
+            
+            /* output */
+            max31865_interface_debug_print("max31865: %d/%d.\n", i + 1, times);
+            max31865_interface_debug_print("max31865: temperature is %0.4fC.\n", temp);
+            
+            /* delay 1000ms */
+            max31865_interface_delay_ms(1000);
+        }
+        
+        /* basic deinit */
+        (void)max31865_basic_deinit();
+        
+        return 0;
+    }
+    else if (strcmp("e_shot", type) == 0)
+    {
+        uint8_t res;
+        uint32_t i;
+        float temp;
+        
+        /* shot init */
+        res = max31865_shot_init(wire, chip_type, r);
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* loop */
+        for (i = 0; i < times; i++)
+        {
+            /* read data */
+            res = max31865_shot_read((float *)&temp);
+            if (res != 0)
             {
-                uint8_t res;
-                uint32_t i, times;
-                float temp;
-                max31865_wire_t wire;
-                max31865_resistor_t type;
-                
-                if (strcmp("-wire", argv[4]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("-type", argv[6]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("-r", argv[8]) != 0)
-                {
-                    return 5;
-                }
-                if (strcmp("2", argv[5]) == 0)
-                {
-                    wire = MAX31865_WIRE_2;
-                }
-                else if (strcmp("3", argv[5]) == 0)
-                {
-                    wire = MAX31865_WIRE_3;
-                }
-                else if (strcmp("4", argv[5]) == 0)
-                {
-                    wire = MAX31865_WIRE_4;
-                }
-                else
-                {
-                    max31865_interface_debug_print("max31865: wire type is invalid.\n");
-                   
-                    return 5;
-                }
-                if (strcmp("100", argv[7]) == 0)
-                {
-                    type = MAX31865_RESISTOR_100PT;
-                }
-                else if (strcmp("1000", argv[7]) == 0)
-                {
-                    type =  MAX31865_RESISTOR_1000PT;
-                }
-                else
-                {
-                    max31865_interface_debug_print("max31865: resistor type is invalid.\n");
-                   
-                    return 5;
-                }
-                
-                res = max31865_shot_init(wire, type, (float)atof(argv[9]));
-                if (res != 0)
-                {
-                    return 1;
-                }
-                times = atoi(argv[3]);
-                for (i = 0; i < times; i++)
-                {
-                    res = max31865_shot_read((float *)&temp);
-                    if (res != 0)
-                    {
-                        (void)max31865_shot_deinit();
-                        
-                        return 1;
-                    }
-                    max31865_interface_debug_print("max31865: %d/%d.\n", i+1, times);
-                    max31865_interface_debug_print("max31865: temperature is %0.4fC.\n", temp);
-                    max31865_interface_delay_ms(1000);
-                }
                 (void)max31865_shot_deinit();
                 
-                return 0;
+                return 1;
             }
-            /* param is invalid */
-            else
-            {
-                return 5;
-            }
+            
+            /* output */
+            max31865_interface_debug_print("max31865: %d/%d.\n", i + 1, times);
+            max31865_interface_debug_print("max31865: temperature is %0.4fC.\n", temp);
+            
+            /* delay 1000ms */
+            max31865_interface_delay_ms(1000);
         }
-        /* param is invalid */
-        else
-        {
-            return 5;
-        }
+        
+        /* shot deinit */
+        (void)max31865_shot_deinit();
+        
+        return 0;
     }
-    /* param is invalid */
+    else if (strcmp("h", type) == 0)
+    {
+        help:
+        max31865_interface_debug_print("Usage:\n");
+        max31865_interface_debug_print("  max31865 (-i | --information)\n");
+        max31865_interface_debug_print("  max31865 (-h | --help)\n");
+        max31865_interface_debug_print("  max31865 (-p | --port)\n");
+        max31865_interface_debug_print("  max31865 (-t reg | --test=reg)\n");
+        max31865_interface_debug_print("  max31865 (-t read | --test=read) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>]\n");
+        max31865_interface_debug_print("           [--resistor=<r>] [--times=<num>]\n");
+        max31865_interface_debug_print("  max31865 (-e read | --example=read) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>]\n");
+        max31865_interface_debug_print("           [--resistor=<r>] [--times=<num>]\n");
+        max31865_interface_debug_print("  max31865 (-e shot | --example=shot) [--wire=<2 | 3 | 4>] [--type=<100 | 1000>]\n");
+        max31865_interface_debug_print("           [--resistor=<r>] [--times=<num>]\n");
+        max31865_interface_debug_print("\n");
+        max31865_interface_debug_print("Options:\n");
+        max31865_interface_debug_print("  -e <fifo>, --example=<fifo>    Run the driver example.\n");
+        max31865_interface_debug_print("  -h, --help                     Show the help.\n");
+        max31865_interface_debug_print("  -i, --information              Show the chip information.\n");
+        max31865_interface_debug_print("  -p, --port                     Display the pin connections of the current board.\n");
+        max31865_interface_debug_print("      --resistor=<r>             Set the reference resistor.([default: 430.0f])\n");
+        max31865_interface_debug_print("  -t <reg | fifo>, --test=<reg | fifo>\n");
+        max31865_interface_debug_print("                                 Run the driver test.\n");
+        max31865_interface_debug_print("      --type=<100 | 1000>        Set the PT resistor type.([default: 100])\n");
+        max31865_interface_debug_print("      --times=<num>              Set the running times.([default: 3])\n");
+        max31865_interface_debug_print("      --wire=<2 | 3 | 4>         Set the PT resistor wire.([default: 4])\n");
+        
+        return 0;
+    }
+    else if (strcmp("i", type) == 0)
+    {
+        max31865_info_t info;
+        
+        /* print max31865 info */
+        max31865_info(&info);
+        max31865_interface_debug_print("max31865: chip is %s.\n", info.chip_name);
+        max31865_interface_debug_print("max31865: manufacturer is %s.\n", info.manufacturer_name);
+        max31865_interface_debug_print("max31865: interface is %s.\n", info.interface);
+        max31865_interface_debug_print("max31865: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
+        max31865_interface_debug_print("max31865: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
+        max31865_interface_debug_print("max31865: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
+        max31865_interface_debug_print("max31865: max current is %0.2fmA.\n", info.max_current_ma);
+        max31865_interface_debug_print("max31865: max temperature is %0.1fC.\n", info.temperature_max);
+        max31865_interface_debug_print("max31865: min temperature is %0.1fC.\n", info.temperature_min);
+        
+        return 0;
+    }
+    else if (strcmp("p", type) == 0)
+    {
+        /* print pin connection */
+        max31865_interface_debug_print("max31865: SCK connected to GPIO11(BCM).\n");
+        max31865_interface_debug_print("max31865: MISO connected to GPIO9(BCM).\n");
+        max31865_interface_debug_print("max31865: MOSI connected to GPIO10(BCM).\n");
+        max31865_interface_debug_print("max31865: CS connected to GPIO8(BCM).\n");
+        
+        return 0;
+    }
     else
     {
         return 5;
