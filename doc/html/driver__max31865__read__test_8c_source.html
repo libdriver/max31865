@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('driver__max31865__read__test_8c_source
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">/* set filter selsct 50Hz */</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">/* set filter select 50Hz */</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    res = <a class="code" href="group__max31865__base__driver.html#ga93a1caaa4abb6129998ee95137c11f13">max31865_set_filter_select</a>(&amp;gs_handle, <a class="code" href="group__max31865__base__driver.html#ggaeda5f5d49b9a3f1d833b4ab93b4e5b7ead89f23960d3e78ea393be573636e923c">MAX31865_FILTER_SELECT_50HZ</a>);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">if</span> (res != 0)</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('driver__max31865__read__test_8c_source
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">/* set resisitor type */</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">/* set resistor type */</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    res = <a class="code" href="group__max31865__base__driver.html#ga5e84f95d56d135807f2c4bc86b3fe414">max31865_set_resistor</a>(&amp;gs_handle, type);</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">if</span> (res != 0)</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    {</div>
@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('driver__max31865__read__test_8c_source
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">/* set reference resisitor */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">/* set reference resistor */</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    res = <a class="code" href="group__max31865__base__driver.html#ga81ee4323267c5f5b32d9e7703aaace89">max31865_set_reference_resistor</a>(&amp;gs_handle, ref_resistor);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">if</span> (res != 0)</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
@@ -192,7 +192,7 @@ $(document).ready(function(){initNavTree('driver__max31865__read__test_8c_source
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    res = <a class="code" href="group__max31865__base__driver.html#gad42dfb616ce6f9ecf674005e49b77e3a">max31865_set_high_fault_threshold</a>(&amp;gs_handle, 0xFFFEU);</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">if</span> (res != 0)</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <a class="code" href="group__max31865__interface__driver.html#gafd695b040505e1aef8acfc8588943af4">max31865_interface_debug_print</a>(<span class="stringliteral">&quot;max31865: set high fault thresholdl failed.\n&quot;</span>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <a class="code" href="group__max31865__interface__driver.html#gafd695b040505e1aef8acfc8588943af4">max31865_interface_debug_print</a>(<span class="stringliteral">&quot;max31865: set high fault threshold failed.\n&quot;</span>);</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        (void)<a class="code" href="group__max31865__base__driver.html#gafadf78bcb06cd7e0efa9372dbd1208cd">max31865_deinit</a>(&amp;gs_handle);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordflow">return</span> 1;</div>

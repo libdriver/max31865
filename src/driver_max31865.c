@@ -786,7 +786,7 @@ uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, ma
 /**
  * @brief      get the fault detection cycle control
  * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *status ponts to a fault detection cycle buffer
+ * @param[out] *status points to a fault detection cycle buffer
  * @return     status code
  *             - 0 success
  *             - 1 get fault detection cycle control failed
@@ -1131,7 +1131,7 @@ uint8_t max31865_info(max31865_info_t *info)
     info->max_current_ma = MAX_CURRENT;                             /* set maximum current */
     info->temperature_max = TEMPERATURE_MAX;                        /* set minimal temperature */
     info->temperature_min = TEMPERATURE_MIN;                        /* set maximum temperature */
-    info->driver_version = DRIVER_VERSION;                          /* set driver verison */
+    info->driver_version = DRIVER_VERSION;                          /* set driver version */
     
     return 0;                                                       /* success return 0 */
 }

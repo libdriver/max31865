@@ -83,7 +83,7 @@ typedef enum
 typedef enum
 { 
     MAX31865_RESISTOR_100PT  = 0x00,        /**< 100pt resistor type */
-    MAX31865_RESISTOR_1000PT = 0x01,        /**< 1000pt resisitor type */
+    MAX31865_RESISTOR_1000PT = 0x01,        /**< 1000pt resistor type */
 } max31865_resistor_t;
 
 /**
@@ -548,7 +548,7 @@ uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, ma
 /**
  * @brief      get the fault detection cycle control
  * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *status ponts to a fault detection cycle buffer
+ * @param[out] *status points to a fault detection cycle buffer
  * @return     status code
  *             - 0 success
  *             - 1 get fault detection cycle control failed

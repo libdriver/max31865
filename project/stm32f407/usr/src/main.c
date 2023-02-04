@@ -79,7 +79,7 @@ uint8_t max31865(uint8_t argc, char **argv)
         {"wire", required_argument, NULL, 4},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     uint32_t times = 3;
     float r = 430.0f;
     max31865_resistor_t chip_type = MAX31865_RESISTOR_100PT;
@@ -413,7 +413,7 @@ int main(void)
     /* uart init */
     uart_init(115200);
     
-    /* shell init && register max31865 fuction */
+    /* shell init && register max31865 function */
     shell_init();
     shell_register("max31865", max31865);
     uart_print("max31865: welcome to libdriver max31865.\n");
@@ -436,7 +436,7 @@ int main(void)
             }
             else if (res == 2)
             {
-                uart_print("max31865: unknow command.\n");
+                uart_print("max31865: unknown command.\n");
             }
             else if (res == 3)
             {
@@ -452,7 +452,7 @@ int main(void)
             }
             else
             {
-                uart_print("max31865: unknow status code.\n");
+                uart_print("max31865: unknown status code.\n");
             }
             uart_flush();
         }

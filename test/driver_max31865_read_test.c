@@ -96,7 +96,7 @@ uint8_t max31865_read_test(max31865_wire_t wire, max31865_resistor_t type, float
         return 1;
     }
     
-    /* set filter selsct 50Hz */
+    /* set filter select 50Hz */
     res = max31865_set_filter_select(&gs_handle, MAX31865_FILTER_SELECT_50HZ);
     if (res != 0)
     {
@@ -116,7 +116,7 @@ uint8_t max31865_read_test(max31865_wire_t wire, max31865_resistor_t type, float
         return 1;
     }
     
-    /* set resisitor type */
+    /* set resistor type */
     res = max31865_set_resistor(&gs_handle, type);
     if (res != 0)
     {
@@ -126,7 +126,7 @@ uint8_t max31865_read_test(max31865_wire_t wire, max31865_resistor_t type, float
         return 1;
     }
     
-    /* set reference resisitor */
+    /* set reference resistor */
     res = max31865_set_reference_resistor(&gs_handle, ref_resistor);
     if (res != 0)
     {
@@ -150,7 +150,7 @@ uint8_t max31865_read_test(max31865_wire_t wire, max31865_resistor_t type, float
     res = max31865_set_high_fault_threshold(&gs_handle, 0xFFFEU);
     if (res != 0)
     {
-        max31865_interface_debug_print("max31865: set high fault thresholdl failed.\n");
+        max31865_interface_debug_print("max31865: set high fault threshold failed.\n");
         (void)max31865_deinit(&gs_handle);
         
         return 1;

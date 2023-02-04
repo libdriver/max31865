@@ -69,7 +69,7 @@ uint8_t max31865(uint8_t argc, char **argv)
         {"wire", required_argument, NULL, 4},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     uint32_t times = 3;
     float r = 430.0f;
     max31865_resistor_t chip_type = MAX31865_RESISTOR_100PT;
@@ -413,7 +413,7 @@ int main(uint8_t argc, char **argv)
     }
     else
     {
-        max31865_interface_debug_print("max31865: unknow status code.\n");
+        max31865_interface_debug_print("max31865: unknown status code.\n");
     }
 
     return 0;
