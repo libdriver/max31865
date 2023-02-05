@@ -125,7 +125,7 @@ uint8_t max31865_basic_init(max31865_wire_t wire, max31865_resistor_t type, floa
     res = max31865_set_high_fault_threshold(&gs_handle, MAX31865_BASIC_DEFAULT_HIGH_FAULT_THRESHOLD);
     if (res != 0)
     {
-        max31865_interface_debug_print("max31865: set high fault thresholdl failed.\n");
+        max31865_interface_debug_print("max31865: set high fault threshold failed.\n");
         (void)max31865_deinit(&gs_handle);
         
         return 1;
