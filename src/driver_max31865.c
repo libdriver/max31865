@@ -52,14 +52,14 @@
 /**
  * @brief chip register definition
  */
-#define MAX31856_REG_CONFIG                0x00        /**< config register */
-#define MAX31856_REG_RTD_MSB               0x01        /**< rtd msb register */
-#define MAX31856_REG_RTD_LSB               0x02        /**< rtd lsb register */
-#define MAX31856_REG_HIGH_FAULT_MSB        0x03        /**< high fault msb register */
-#define MAX31856_REG_HIGH_FAULT_LSB        0x04        /**< high fault lsb register */
-#define MAX31856_REG_LOW_FAULT_MSB         0x05        /**< low fault msb register */
-#define MAX31856_REG_LOW_FAULT_LSB         0x06        /**< low fault lsb register */
-#define MAX31856_REG_FAULT_STATUS          0x07        /**< fault status register */
+#define MAX31865_REG_CONFIG                0x00        /**< config register */
+#define MAX31865_REG_RTD_MSB               0x01        /**< rtd msb register */
+#define MAX31865_REG_RTD_LSB               0x02        /**< rtd lsb register */
+#define MAX31865_REG_HIGH_FAULT_MSB        0x03        /**< high fault msb register */
+#define MAX31865_REG_HIGH_FAULT_LSB        0x04        /**< high fault lsb register */
+#define MAX31865_REG_LOW_FAULT_MSB         0x05        /**< low fault msb register */
+#define MAX31865_REG_LOW_FAULT_LSB         0x06        /**< low fault lsb register */
+#define MAX31865_REG_FAULT_STATUS          0x07        /**< fault status register */
 
 /**
  * @brief calculate definition
@@ -195,24 +195,24 @@ uint8_t max31865_deinit(max31865_handle_t *handle)
         return 3;                                                                                  /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                              /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                              /* read config */
     if (res != 0)                                                                                  /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                           /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                           /* read failed */
         
         return 4;                                                                                  /* return error */
     }
     prev &= ~(1 << 7);                                                                             /* clear flag */
-    res = handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
     if (res != 0)                                                                                  /* check result */
     {
-        handle->debug_print("max31856: write failed.\n");                                          /* write failed */
+        handle->debug_print("max31865: write failed.\n");                                          /* write failed */
         
         return 4;                                                                                  /* return error */
     }
     if (handle->spi_deinit() != 0)                                                                 /* spi deinit */
     {
-        handle->debug_print("max31856: spi deinit failed.\n");                                     /* spi deinit failed */
+        handle->debug_print("max31865: spi deinit failed.\n");                                     /* spi deinit failed */
         
         return 1;                                                                                  /* return error */
     }         
@@ -245,17 +245,17 @@ uint8_t max31865_set_filter_select(max31865_handle_t *handle, max31865_filter_se
         return 3;                                                                                   /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
     prev &= ~(1 << 0);                                                                              /* clear filter bit */
     prev |= filter << 0;                                                                            /* set filter */
 
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -282,10 +282,10 @@ uint8_t max31865_get_filter_select(max31865_handle_t *handle, max31865_filter_se
         return 3;                                                            /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
     if (res != 0)                                                            /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                     /* read failed */
+        handle->debug_print("max31865: read failed.\n");                     /* read failed */
        
         return 1;                                                            /* return error */
     }
@@ -319,17 +319,17 @@ uint8_t max31865_set_wire(max31865_handle_t *handle, max31865_wire_t wire)
         return 3;                                                                                   /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
         
         return 1;                                                                                   /* return error */
     }
     prev &= ~(1 << 4);                                                                              /* clear wire bit */
     prev |= wire << 4;                                                                              /* set wire */
     
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -356,10 +356,10 @@ uint8_t max31865_get_wire(max31865_handle_t *handle, max31865_wire_t *wire)
         return 3;                                                            /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
     if (res != 0)                                                            /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                     /* read failed */
+        handle->debug_print("max31865: read failed.\n");                     /* read failed */
         
         return 1;                                                            /* return error */
     }
@@ -497,17 +497,17 @@ uint8_t max31865_set_vbias(max31865_handle_t *handle, max31865_bool_t enable)
         return 3;                                                                                   /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
         
         return 1;                                                                                   /* return error */
     }
     prev &= ~(1 << 7);                                                                              /* clear bias bit */
     prev |= enable << 7;                                                                            /* set bias enable */
     
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -534,10 +534,10 @@ uint8_t max31865_get_vbias(max31865_handle_t *handle, max31865_bool_t *enable)
         return 3;                                                            /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);        /* read config */
     if (res != 0)                                                            /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                     /* read failed */
+        handle->debug_print("max31865: read failed.\n");                     /* read failed */
         
         return 1;                                                            /* return error */
     }
@@ -570,17 +570,17 @@ uint8_t max31865_clear_fault_status(max31865_handle_t *handle)
         return 3;                                                                                   /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
     prev &= ~(1 << 1);                                                                              /* clear bit */
     prev |= 1 << 1;                                                                                 /* set clear */
 
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -605,7 +605,7 @@ uint8_t max31865_get_fault_status(max31865_handle_t *handle, uint8_t *status)
         return 3;                                                         /* return error */
     }
     
-    return handle->spi_read(MAX31856_REG_FAULT_STATUS, status, 1);        /* read status */
+    return handle->spi_read(MAX31865_REG_FAULT_STATUS, status, 1);        /* read status */
 }
 
 /**
@@ -636,7 +636,7 @@ uint8_t max31865_set_high_fault_threshold(max31865_handle_t *handle, uint16_t th
     buf[0] = (uint8_t)((threshold >> 8) & 0xFF);                                                          /* set msb */
     buf[1] = (uint8_t)(threshold & 0xFF);                                                                 /* set lsb */
     
-    return handle->spi_write(MAX31856_REG_HIGH_FAULT_MSB | WRITE_ADDRESS_MASK, (uint8_t *)buf, 2);        /* write fault threshold */
+    return handle->spi_write(MAX31865_REG_HIGH_FAULT_MSB | WRITE_ADDRESS_MASK, (uint8_t *)buf, 2);        /* write fault threshold */
 }
 
 /**
@@ -664,10 +664,10 @@ uint8_t max31865_get_high_fault_threshold(max31865_handle_t *handle, uint16_t *t
         return 3;                                                                    /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_HIGH_FAULT_MSB, (uint8_t *)buf, 2);          /* get fault msb */
+    res = handle->spi_read(MAX31865_REG_HIGH_FAULT_MSB, (uint8_t *)buf, 2);          /* get fault msb */
     if (res != 0)                                                                    /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                             /* read failed */
+        handle->debug_print("max31865: read failed.\n");                             /* read failed */
        
         return 1;                                                                    /* return error */
     }
@@ -705,7 +705,7 @@ uint8_t max31865_set_low_fault_threshold(max31865_handle_t *handle, uint16_t thr
     buf[0] = (uint8_t)((threshold >> 8) & 0xFF);                                                         /* set msb */
     buf[1] = (uint8_t)(threshold & 0xFF);                                                                /* set lsb */
     
-    return handle->spi_write(MAX31856_REG_LOW_FAULT_MSB | WRITE_ADDRESS_MASK, (uint8_t *)buf, 2);        /* write config */
+    return handle->spi_write(MAX31865_REG_LOW_FAULT_MSB | WRITE_ADDRESS_MASK, (uint8_t *)buf, 2);        /* write config */
 }
 
 /**
@@ -733,10 +733,10 @@ uint8_t max31865_get_low_fault_threshold(max31865_handle_t *handle, uint16_t *th
         return 3;                                                                 /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_LOW_FAULT_MSB, (uint8_t *)buf, 2);        /* write low fault msb */
+    res = handle->spi_read(MAX31865_REG_LOW_FAULT_MSB, (uint8_t *)buf, 2);        /* write low fault msb */
     if (res != 0)                                                                 /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                          /* read failed */
+        handle->debug_print("max31865: read failed.\n");                          /* read failed */
         
         return 1;                                                                 /* return error */
     }
@@ -770,17 +770,17 @@ uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, ma
         return 3;                                                                                   /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
     prev &= ~(3 << 2);                                                                              /* clear control */
     prev |= control << 2;                                                                           /* set control */
 
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -807,10 +807,10 @@ uint8_t max31865_get_fault_detection_cycle_control(max31865_handle_t *handle, ma
         return 3;                                                                  /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);              /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);              /* read config */
     if (res != 0)                                                                  /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                           /* read failed */
+        handle->debug_print("max31865: read failed.\n");                           /* read failed */
        
         return 1;                                                                  /* return error */
     }
@@ -849,10 +849,10 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
         return 3;                                                                                     /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                                 /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                                 /* read config */
     if (res != 0)                                                                                     /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                              /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                              /* read failed */
        
         return 1;                                                                                     /* return error */
     }
@@ -860,10 +860,10 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     prev |= 1 << 7;                                                                                   /* enable vbias */
     prev &= ~(1 << 6);                                                                                /* set normally off */
     prev |= 1 << 5;                                                                                   /* set shot */
-    res = handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);           /* write config */
+    res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);           /* write config */
     if (res != 0)                                                                                     /* check result */
     {
-        handle->debug_print("max31856: write failed.\n");                                             /* write failed */
+        handle->debug_print("max31865: write failed.\n");                                             /* write failed */
        
         return 1;                                                                                     /* return error */
     }
@@ -871,33 +871,33 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     while (((prev & (1 << 5)) != 0) && (times != 0))                                                  /* check retry times */
     {
         handle->delay_ms(63);                                                                         /* delay 63 ms */
-        res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                             /* read config */
+        res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                             /* read config */
         if (res != 0)                                                                                 /* check result */
         {
-            handle->debug_print("max31856: read failed.\n");                                          /* read failed */
+            handle->debug_print("max31865: read failed.\n");                                          /* read failed */
            
             return 1;                                                                                 /* return error */
         }
         times--;                                                                                      /* retry times-- */
         if (times == 0)                                                                               /* if retry times == 0 */
         {
-            handle->debug_print("max31856: read timeout.\n");                                         /* read timeout */
+            handle->debug_print("max31865: read timeout.\n");                                         /* read timeout */
            
             return 1;                                                                                 /* return error */
         }
     }
     memset(buf, 0, sizeof(uint8_t) * 2);                                                              /* clear the buffer */
-    res = handle->spi_read(MAX31856_REG_RTD_MSB, (uint8_t *)buf, 2);                                  /* read rtd msb */
+    res = handle->spi_read(MAX31865_REG_RTD_MSB, (uint8_t *)buf, 2);                                  /* read rtd msb */
     if (res != 0)                                                                                     /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                              /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                              /* read failed */
        
         return 1;                                                                                     /* return error */
     }
     *raw = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                                              /* get raw data */
     if (((*raw) & 0x01) != 0)
     {
-        handle->debug_print("max31856: find rtd fault.\n");                                           /* find rtd fault */
+        handle->debug_print("max31865: find rtd fault.\n");                                           /* find rtd fault */
        
         return 4;                                                                                     /* return error */
     }
@@ -942,10 +942,10 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
     }
     
     handle->delay_ms(10);                                                                           /* delay 10 ms */
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
@@ -954,7 +954,7 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
     prev |= 1 << 6;                                                                                 /* set auto mode */
     prev &= ~(1 << 5);                                                                              /* disable shot */
 
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -980,10 +980,10 @@ uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
         return 3;                                                                                   /* return error */
     }
     
-    res = handle->spi_read(MAX31856_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
@@ -992,7 +992,7 @@ uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
     prev &= ~(1 << 6);                                                                              /* disable auto mode */
     prev &= ~(1 << 5);                                                                              /* disable shot */
 
-    return handle->spi_write(MAX31856_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
+    return handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
 }
 
 /**
@@ -1024,17 +1024,17 @@ uint8_t max31865_continuous_read(max31865_handle_t *handle, uint16_t *raw, float
     }
     
     memset(buf, 0, sizeof(uint8_t) * 2);                                                            /* clear the buffer */
-    res = handle->spi_read(MAX31856_REG_RTD_MSB, (uint8_t *)buf, 2);                                /* read rtd msb */
+    res = handle->spi_read(MAX31865_REG_RTD_MSB, (uint8_t *)buf, 2);                                /* read rtd msb */
     if (res != 0)                                                                                   /* check result */
     {
-        handle->debug_print("max31856: read failed.\n");                                            /* read failed */
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
        
         return 1;                                                                                   /* return error */
     }
     *raw = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                                            /* get raw data */
     if (((*raw) & 0x01) != 0)                                                                       /* check error */
     {
-        handle->debug_print("max31856: find rtd fault.\n");                                         /* find rtd fault */
+        handle->debug_print("max31865: find rtd fault.\n");                                         /* find rtd fault */
        
         return 4;                                                                                   /* return error */
     }
