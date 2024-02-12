@@ -1,6 +1,6 @@
 /**
  * @mainpage  LibDriver MAX31865
- * @brief     libdriver max31865 is a full function driver of max31865 and it can run in both MCU and Linux platform.
+ * @brief     LibDriver MAX31865 is a full function driver of MAX31865 and it can run in both MCU and Linux platform.
  * @version   2.0.0
  * @author    Shifeng Li
  *
