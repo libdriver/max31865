@@ -59,9 +59,9 @@ extern "C"{
 
 /**
  * @brief     shot example init
- * @param[in] wire is the pt resistor wire
- * @param[in] type is the pt resistor type
- * @param[in] ref_resistor is the reference resistor value
+ * @param[in] wire pt resistor wire
+ * @param[in] type pt resistor type
+ * @param[in] ref_resistor reference resistor value
  * @return    status code
  *            - 0 success
  *            - 1 init failed
@@ -80,7 +80,7 @@ uint8_t max31865_shot_deinit(void);
 
 /**
  * @brief      shot example read the temperature
- * @param[out] *temp points to a converted temperature buffer
+ * @param[out] *temp pointer to a converted temperature buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed

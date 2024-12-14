@@ -51,10 +51,10 @@ extern "C"{
 
 /**
  * @brief     read test
- * @param[in] wire is the pt resistor wire
- * @param[in] type is the pt resistor type
- * @param[in] ref_resistor is the reference resistor value
- * @param[in] times is the test times
+ * @param[in] wire pt resistor wire
+ * @param[in] type pt resistor type
+ * @param[in] ref_resistor reference resistor value
+ * @param[in] times test times
  * @return    status code
  *            - 0 success
  *            - 1 test failed

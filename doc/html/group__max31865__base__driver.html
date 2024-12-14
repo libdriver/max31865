@@ -485,7 +485,7 @@ Functions</h2></td></tr>
 <p>clear all fault status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -537,9 +537,9 @@ Functions</h2></td></tr>
 <p>read data continuously </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*raw</td><td>points to a raw temperature buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*temp</td><td>points to a converted temperature buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*raw</td><td>pointer to a raw temperature buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*temp</td><td>pointer to a converted temperature buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -576,7 +576,7 @@ Functions</h2></td></tr>
 <p>close the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -623,8 +623,8 @@ Functions</h2></td></tr>
 <p>get the fault detection cycle control </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>points to a fault detection cycle buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>pointer to a fault detection cycle buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -670,8 +670,8 @@ Functions</h2></td></tr>
 <p>get the fault status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>points to a fault status buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>pointer to a fault status buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -717,8 +717,8 @@ Functions</h2></td></tr>
 <p>get the filter type </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*filter</td><td>points to a filter type buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*filter</td><td>pointer to a filter type buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -764,8 +764,8 @@ Functions</h2></td></tr>
 <p>get the high fault threshold </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*threshold</td><td>points to a high fault threshold buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*threshold</td><td>pointer to a high fault threshold buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -811,8 +811,8 @@ Functions</h2></td></tr>
 <p>get the low fault threshold </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*threshold</td><td>points to a low fault threshold buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*threshold</td><td>pointer to a low fault threshold buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -858,8 +858,8 @@ Functions</h2></td></tr>
 <p>get the reference resistor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*value</td><td>points to a reference resistor buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*value</td><td>pointer to a reference resistor buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -904,8 +904,8 @@ Functions</h2></td></tr>
 <p>get the pt resistor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*resistor</td><td>points to a pt resistor type value buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*resistor</td><td>pointer to a pt resistor type value buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -950,8 +950,8 @@ Functions</h2></td></tr>
 <p>get the chip vbias </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>points to a bool value buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*enable</td><td>pointer to a bool value buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -997,8 +997,8 @@ Functions</h2></td></tr>
 <p>get the pt resistor wire </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*wire</td><td>points to a pt resistor wire type buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*wire</td><td>pointer to a pt resistor wire type buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1034,7 +1034,7 @@ Functions</h2></td></tr>
 <p>get chip's information </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to a max31865 info structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>pointer to a max31865 info structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -1068,7 +1068,7 @@ Functions</h2></td></tr>
 <p>initialize the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -1114,8 +1114,8 @@ Functions</h2></td></tr>
 <p>set the fault detection cycle control </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">control</td><td>is the fault detection cycle </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">control</td><td>fault detection cycle </td></tr>
   </table>
   </dd>
 </dl>
@@ -1161,8 +1161,8 @@ Functions</h2></td></tr>
 <p>set the filter type </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">filter</td><td>is the filter type and it can be 50Hz or 60Hz </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter</td><td>filter type and it can be 50Hz or 60Hz </td></tr>
   </table>
   </dd>
 </dl>
@@ -1208,8 +1208,8 @@ Functions</h2></td></tr>
 <p>set the high fault threshold </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">threshold</td><td>is the high fault threshold </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">threshold</td><td>high fault threshold </td></tr>
   </table>
   </dd>
 </dl>
@@ -1255,8 +1255,8 @@ Functions</h2></td></tr>
 <p>set the low fault threshold </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">threshold</td><td>is the low fault threshold </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">threshold</td><td>low fault threshold </td></tr>
   </table>
   </dd>
 </dl>
@@ -1302,8 +1302,8 @@ Functions</h2></td></tr>
 <p>set the reference resistor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>is the reference resistor value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>reference resistor value </td></tr>
   </table>
   </dd>
 </dl>
@@ -1348,8 +1348,8 @@ Functions</h2></td></tr>
 <p>set the pt resistor </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">resistor</td><td>is the pt resistor type value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">resistor</td><td>pt resistor type value </td></tr>
   </table>
   </dd>
 </dl>
@@ -1394,8 +1394,8 @@ Functions</h2></td></tr>
 <p>set the chip vbias </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>bool value </td></tr>
   </table>
   </dd>
 </dl>
@@ -1441,8 +1441,8 @@ Functions</h2></td></tr>
 <p>set the pt resistor wire </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wire</td><td>is the pt resistor wire and it can be 2, 3 or 4 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">wire</td><td>pt resistor wire and it can be 2, 3 or 4 </td></tr>
   </table>
   </dd>
 </dl>
@@ -1494,9 +1494,9 @@ Functions</h2></td></tr>
 <p>read data once </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*raw</td><td>points to a raw temperature buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*temp</td><td>points to a converted temperature buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*raw</td><td>pointer to a raw temperature buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*temp</td><td>pointer to a converted temperature buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1533,7 +1533,7 @@ Functions</h2></td></tr>
 <p>start reading </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -1569,7 +1569,7 @@ Functions</h2></td></tr>
 <p>stop reading </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to a max31865 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to a max31865 handle structure </td></tr>
   </table>
   </dd>
 </dl>
