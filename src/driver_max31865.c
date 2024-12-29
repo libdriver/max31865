@@ -70,9 +70,9 @@
 
 /**
  * @brief     convert the temperature
- * @param[in] rt is the raw resistor value
- * @param[in] rtd_nominal is the resistor type value
- * @param[in] ref_resistor is the reference resistor value
+ * @param[in] rt raw resistor value
+ * @param[in] rtd_nominal resistor type value
+ * @param[in] ref_resistor reference resistor value
  * @return    converted value
  * @note      none
  */
@@ -111,7 +111,7 @@ static float a_max31865_temperature_conversion(float rt, float rtd_nominal, floa
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to a max31865 handle structure
+ * @param[in] *handle pointer to a max31865 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 spi initialization failed
@@ -173,7 +173,7 @@ uint8_t max31865_init(max31865_handle_t *handle)
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to a max31865 handle structure
+ * @param[in] *handle pointer to a max31865 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 spi deinit failed
@@ -223,8 +223,8 @@ uint8_t max31865_deinit(max31865_handle_t *handle)
 
 /**
  * @brief     set the filter type
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] filter is the filter type and it can be 50Hz or 60Hz
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] filter filter type and it can be 50Hz or 60Hz
  * @return    status code
  *            - 0 success
  *            - 1 set filter select failed
@@ -260,8 +260,8 @@ uint8_t max31865_set_filter_select(max31865_handle_t *handle, max31865_filter_se
 
 /**
  * @brief      get the filter type
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *filter points to a filter type buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *filter pointer to a filter type buffer
  * @return     status code
  *             - 0 success
  *             - 1 get filter select failed
@@ -297,8 +297,8 @@ uint8_t max31865_get_filter_select(max31865_handle_t *handle, max31865_filter_se
 
 /**
  * @brief     set the pt resistor wire
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] wire is the pt resistor wire and it can be 2, 3 or 4
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] wire pt resistor wire and it can be 2, 3 or 4
  * @return    status code
  *            - 0 success
  *            - 1 set wire failed
@@ -334,8 +334,8 @@ uint8_t max31865_set_wire(max31865_handle_t *handle, max31865_wire_t wire)
 
 /**
  * @brief      get the pt resistor wire
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *wire points to a pt resistor wire type buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *wire pointer to a pt resistor wire type buffer
  * @return     status code
  *             - 0 success
  *             - 1 get wire failed
@@ -371,8 +371,8 @@ uint8_t max31865_get_wire(max31865_handle_t *handle, max31865_wire_t *wire)
 
 /**
  * @brief     set the reference resistor
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] value is the reference resistor value
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] value reference resistor value
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -397,8 +397,8 @@ uint8_t max31865_set_reference_resistor(max31865_handle_t *handle, float value)
 
 /**
  * @brief      get the reference resistor
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *value points to a reference resistor buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *value pointer to a reference resistor buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -423,8 +423,8 @@ uint8_t max31865_get_reference_resistor(max31865_handle_t *handle, float *value)
 
 /**
  * @brief     set the pt resistor 
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] resistor is the pt resistor type value
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] resistor pt resistor type value
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -449,8 +449,8 @@ uint8_t max31865_set_resistor(max31865_handle_t *handle, max31865_resistor_t res
 
 /**
  * @brief      get the pt resistor 
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *resistor points to a pt resistor type value buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *resistor pointer to a pt resistor type value buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -475,8 +475,8 @@ uint8_t max31865_get_resistor(max31865_handle_t *handle, max31865_resistor_t *re
 
 /**
  * @brief     set the chip vbias
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set vbias failed
@@ -512,8 +512,8 @@ uint8_t max31865_set_vbias(max31865_handle_t *handle, max31865_bool_t enable)
 
 /**
  * @brief      get the chip vbias
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *enable points to a bool value buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *enable pointer to a bool value buffer
  * @return     status code
  *             - 0 success
  *             - 1 get vbias failed
@@ -549,7 +549,7 @@ uint8_t max31865_get_vbias(max31865_handle_t *handle, max31865_bool_t *enable)
 
 /**
  * @brief     clear all fault status
- * @param[in] *handle points to a max31865 handle structure
+ * @param[in] *handle pointer to a max31865 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 clear fault status failed
@@ -585,8 +585,8 @@ uint8_t max31865_clear_fault_status(max31865_handle_t *handle)
 
 /**
  * @brief      get the fault status
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *status points to a fault status buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *status pointer to a fault status buffer
  * @return     status code
  *             - 0 success
  *             - 1 get fault status failed
@@ -610,8 +610,8 @@ uint8_t max31865_get_fault_status(max31865_handle_t *handle, uint8_t *status)
 
 /**
  * @brief     set the high fault threshold
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] threshold is the high fault threshold
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] threshold high fault threshold
  * @return    status code
  *            - 0 success
  *            - 1 set high fault threshold failed
@@ -641,8 +641,8 @@ uint8_t max31865_set_high_fault_threshold(max31865_handle_t *handle, uint16_t th
 
 /**
  * @brief      get the high fault threshold
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *threshold points to a high fault threshold buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *threshold pointer to a high fault threshold buffer
  * @return     status code
  *             - 0 success
  *             - 1 get high fault threshold failed
@@ -679,8 +679,8 @@ uint8_t max31865_get_high_fault_threshold(max31865_handle_t *handle, uint16_t *t
 
 /**
  * @brief     set the low fault threshold
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] threshold is the low fault threshold
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] threshold low fault threshold
  * @return    status code
  *            - 0 success
  *            - 1 set low fault threshold failed
@@ -710,8 +710,8 @@ uint8_t max31865_set_low_fault_threshold(max31865_handle_t *handle, uint16_t thr
 
 /**
  * @brief      get the low fault threshold
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *threshold points to a low fault threshold buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *threshold pointer to a low fault threshold buffer
  * @return     status code
  *             - 0 success
  *             - 1 get low fault threshold failed
@@ -748,8 +748,8 @@ uint8_t max31865_get_low_fault_threshold(max31865_handle_t *handle, uint16_t *th
 
 /**
  * @brief     set the fault detection cycle control
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] control is the fault detection cycle
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] control fault detection cycle
  * @return    status code
  *            - 0 success
  *            - 1 set fault detection cycle control failed
@@ -785,8 +785,8 @@ uint8_t max31865_set_fault_detection_cycle_control(max31865_handle_t *handle, ma
 
 /**
  * @brief      get the fault detection cycle control
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *status points to a fault detection cycle buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *status pointer to a fault detection cycle buffer
  * @return     status code
  *             - 0 success
  *             - 1 get fault detection cycle control failed
@@ -822,9 +822,9 @@ uint8_t max31865_get_fault_detection_cycle_control(max31865_handle_t *handle, ma
 
 /**
  * @brief      read data once
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *raw points to a raw temperature buffer
- * @param[out] *temp points to a converted temperature buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *raw pointer to a raw temperature buffer
+ * @param[out] *temp pointer to a converted temperature buffer
  * @return     status code
  *             - 0 success
  *             - 1 single read failed
@@ -920,7 +920,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
 
 /**
  * @brief     start reading
- * @param[in] *handle points to a max31865 handle structure
+ * @param[in] *handle pointer to a max31865 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 start failed
@@ -959,7 +959,7 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
 
 /**
  * @brief     stop reading
- * @param[in] *handle points to a max31865 handle structure
+ * @param[in] *handle pointer to a max31865 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 stop failed
@@ -997,9 +997,9 @@ uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
 
 /**
  * @brief      read data continuously
- * @param[in]  *handle points to a max31865 handle structure
- * @param[out] *raw points to a raw temperature buffer
- * @param[out] *temp points to a converted temperature buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[out] *raw pointer to a raw temperature buffer
+ * @param[out] *temp pointer to a converted temperature buffer
  * @return     status code
  *             - 0 success
  *             - 1 continuous read failed
@@ -1057,9 +1057,9 @@ uint8_t max31865_continuous_read(max31865_handle_t *handle, uint16_t *raw, float
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to a max31865 handle structure
- * @param[in] reg is the register address
- * @param[in] value is the register value
+ * @param[in] *handle pointer to a max31865 handle structure
+ * @param[in] reg register address
+ * @param[in] value register value
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -1083,9 +1083,9 @@ uint8_t max31865_set_reg(max31865_handle_t *handle, uint8_t reg, uint8_t value)
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to a max31865 handle structure
- * @param[in]  reg is the register address
- * @param[out] *value points to a register value buffer
+ * @param[in]  *handle pointer to a max31865 handle structure
+ * @param[in]  reg register address
+ * @param[out] *value pointer to a register value buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -1109,7 +1109,7 @@ uint8_t max31865_get_reg(max31865_handle_t *handle, uint8_t reg, uint8_t *value)
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to a max31865 info structure
+ * @param[out] *info pointer to a max31865 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
