@@ -1,3 +1,9 @@
+## 2.0.5 (2025-03-27)
+
+## Bug Fixes
+
+- fix temperature conversion errors
+
 ## 2.0.4 (2025-03-02)
 
 ## Bug Fixes

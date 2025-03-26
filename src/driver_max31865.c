@@ -79,7 +79,7 @@
 static float a_max31865_temperature_conversion(float rt, float rtd_nominal, float ref_resistor)
 {
     float z1, z2, z3, z4, temp;
-    float rpoly = rt;
+    float rpoly;
     
     rt /= 32768;                             /* div 32768 */
     rt *= ref_resistor;                      /* ref_resistor */
@@ -95,6 +95,7 @@ static float a_max31865_temperature_conversion(float rt, float rtd_nominal, floa
     }
     rt /= rtd_nominal;                       /* nominal */
     rt *= 100;                               /* normalize to 100 ohm */
+    rpoly = rt;                              /* use normalized value for polynomial */
     temp = -242.02f;                         /* -242.02 */
     temp += 2.2228f * rpoly;                 /* add offset */
     rpoly *= rt;                             /* square */
