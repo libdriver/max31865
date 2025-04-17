@@ -10,7 +10,7 @@
 
 The MAX31865 is an easy-to-use resistance-to-digital converter optimized for platinum resistance temperature detectors (RTDs). An external resistor sets the sensitivity for the RTD being used and a precision delta-sigma ADC converts the ratio of the RTD resistance to the reference resistance into digital form. The MAX31865’s inputs are protected against overvoltage faults as large as Q45V. Programmable detection of RTD and cable open and short conditions is included. MAX31865 is used in industrial equipment, instruments and medical devices.
 
-LibDriver MAX31865 is the full function driver of MAX31865 launched by LibDriver.It provides functions of PT temperature continuous mode reading, PT temperature single mode reading, etc. LibDriver is MISRA compliant.
+LibDriver MAX31865 is a full-featured driver of MAX31865 launched by LibDriver.It provides functions of PT temperature continuous mode reading, PT temperature single mode reading, etc. LibDriver is MISRA compliant.
 
 ### Table of Contents
 
