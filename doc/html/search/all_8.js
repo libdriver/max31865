@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['write_5faddress_5fmask_147',['WRITE_ADDRESS_MASK',['../driver__max31865_8c.html#a90faa548b7a089ee4e103794936176ae',1,'driver_max31865.c']]]
+  ['ref_5fresistor_0',['ref_resistor',['../structmax31865__handle__s.html#aa35e61f17881237580bfbbe15c4eacb2',1,'max31865_handle_s']]],
+  ['resistor_1',['resistor',['../structmax31865__handle__s.html#ad828f6f052a0288d6c7d796527efd0f1',1,'max31865_handle_s']]],
+  ['rtd_5fa_2',['RTD_A',['../driver__max31865_8c.html#a67b098bcecf7d326638c621d3de7d3a4',1,'driver_max31865.c']]],
+  ['rtd_5fb_3',['RTD_B',['../driver__max31865_8c.html#a1a4ebeac22bba6b479c6d968e49ae884',1,'driver_max31865.c']]]
 ];

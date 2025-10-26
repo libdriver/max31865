@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['ref_5fresistor_131',['ref_resistor',['../structmax31865__handle__s.html#aa35e61f17881237580bfbbe15c4eacb2',1,'max31865_handle_s']]],
-  ['resistor_132',['resistor',['../structmax31865__handle__s.html#ad828f6f052a0288d6c7d796527efd0f1',1,'max31865_handle_s']]],
-  ['rtd_5fa_133',['RTD_A',['../driver__max31865_8c.html#a67b098bcecf7d326638c621d3de7d3a4',1,'driver_max31865.c']]],
-  ['rtd_5fb_134',['RTD_B',['../driver__max31865_8c.html#a1a4ebeac22bba6b479c6d968e49ae884',1,'driver_max31865.c']]]
+  ['inited_0',['inited',['../structmax31865__handle__s.html#a19bedf28d2b9748f6a62d9ae93f4e68f',1,'max31865_handle_s']]],
+  ['interface_1',['interface',['../structmax31865__info__s.html#aebaa6c28dd4f2c3dc27566fcb910fd28',1,'max31865_info_s']]],
+  ['interface_20driver_20function_2',['max31865 interface driver function',['../group__max31865__interface__driver.html',1,'']]]
 ];
