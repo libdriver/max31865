@@ -726,7 +726,7 @@ $(function(){initNavTree('driver__max31865_8c_source.html','',''); });
 <div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>       </div>
 <div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>        <span class="keywordflow">return</span> 1;                                                                                     <span class="comment">/* return error */</span></div>
 <div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span>    }</div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    times = 5000;                                                                                     <span class="comment">/* set retry times */</span></div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>    times = 50;                                                                                       <span class="comment">/* set retry times */</span></div>
 <div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>    <span class="keywordflow">while</span> (((prev &amp; (1 &lt;&lt; 5)) != 0) &amp;&amp; (times != 0))                                                  <span class="comment">/* check retry times */</span></div>
 <div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>    {</div>
 <div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>        handle-&gt;<a class="code hl_variable" href="structmax31865__handle__s.html#a406c9433252b7366de417b7a60915c81">delay_ms</a>(63);                                                                         <span class="comment">/* delay 63 ms */</span></div>

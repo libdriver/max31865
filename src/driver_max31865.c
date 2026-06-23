@@ -868,7 +868,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
        
         return 1;                                                                                     /* return error */
     }
-    times = 5000;                                                                                     /* set retry times */
+    times = 50;                                                                                       /* set retry times */
     while (((prev & (1 << 5)) != 0) && (times != 0))                                                  /* check retry times */
     {
         handle->delay_ms(63);                                                                         /* delay 63 ms */
