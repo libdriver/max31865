@@ -46,7 +46,7 @@
 #define SUPPLY_VOLTAGE_MAX        3.6f                               /**< chip max supply voltage */
 #define MAX_CURRENT               5.75f                              /**< chip max current */
 #define TEMPERATURE_MIN           -40.0f                             /**< chip min operating temperature */
-#define TEMPERATURE_MAX           85.0f                              /**< chip max operating temperature */
+#define TEMPERATURE_MAX           125.0f                             /**< chip max operating temperature */
 #define DRIVER_VERSION            2000                               /**< driver version */
 
 /**
@@ -165,7 +165,7 @@ uint8_t max31865_init(max31865_handle_t *handle)
     { 
         handle->debug_print("max31865: spi init failed.\n");           /* spi init failed */
        
-        return 3;                                                      /* return error */
+        return 1;                                                      /* return error */
     }
     handle->inited = 1;                                                /* flag initialization */
 
@@ -204,6 +204,7 @@ uint8_t max31865_deinit(max31865_handle_t *handle)
         return 4;                                                                                  /* return error */
     }
     prev &= ~(1 << 7);                                                                             /* clear flag */
+    prev &= ~(1 << 6);                                                                             /* set normally off */
     res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);        /* write config */
     if (res != 0)                                                                                  /* check result */
     {
@@ -857,10 +858,25 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
        
         return 1;                                                                                     /* return error */
     }
-    prev |= 1 << 1;                                                                                   /* set fault detection */
     prev |= 1 << 7;                                                                                   /* enable vbias */
-    prev &= ~(1 << 6);                                                                                /* set normally off */
+    res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);           /* write config */
+    if (res != 0)                                                                                     /* check result */
+    {
+        handle->debug_print("max31865: write failed.\n");                                             /* write failed */
+       
+        return 1;                                                                                     /* return error */
+    }
+    handle->delay_ms(15);                                                                             /* enable vbias */
+    
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                                 /* read config */
+    if (res != 0)                                                                                     /* check result */
+    {
+        handle->debug_print("max31865: read failed.\n");                                              /* read failed */
+       
+        return 1;                                                                                     /* return error */
+    }
     prev |= 1 << 5;                                                                                   /* set shot */
+    prev &= ~(1 << 6);                                                                                /* set normally off */
     res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);           /* write config */
     if (res != 0)                                                                                     /* check result */
     {
@@ -871,7 +887,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     times = 50;                                                                                       /* set retry times */
     while (((prev & (1 << 5)) != 0) && (times != 0))                                                  /* check retry times */
     {
-        handle->delay_ms(63);                                                                         /* delay 63 ms */
+        handle->delay_ms(66);                                                                         /* delay 66 ms */
         res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                             /* read config */
         if (res != 0)                                                                                 /* check result */
         {
@@ -950,7 +966,6 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
        
         return 1;                                                                                   /* return error */
     }
-    prev |= 1 << 1;                                                                                 /* set fault detection */
     prev |= 1 << 7;                                                                                 /* enable vbias */
     prev |= 1 << 6;                                                                                 /* set auto mode */
     prev &= ~(1 << 5);                                                                              /* disable shot */
@@ -988,7 +1003,6 @@ uint8_t max31865_stop_continuous_read(max31865_handle_t *handle)
        
         return 1;                                                                                   /* return error */
     }
-    prev |= 1 << 1;                                                                                 /* set fault detection */
     prev &= ~(1 << 7);                                                                              /* disable vbias */
     prev &= ~(1 << 6);                                                                              /* disable auto mode */
     prev &= ~(1 << 5);                                                                              /* disable shot */

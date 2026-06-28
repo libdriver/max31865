@@ -128,7 +128,7 @@ max31865: driver version is 2.0.
 max31865: min supply voltage is 3.0V.
 max31865: max supply voltage is 3.6V.
 max31865: max current is 5.75mA.
-max31865: max temperature is 85.0C.
+max31865: max temperature is 125.0C.
 max31865: min temperature is -40.0C.
 ```
 
