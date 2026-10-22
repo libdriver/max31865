@@ -837,7 +837,8 @@ uint8_t max31865_get_fault_detection_cycle_control(max31865_handle_t *handle, ma
  */
 uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *temp)
 {
-    uint8_t res, prev;
+    uint8_t res;
+    uint8_t prev;
     uint8_t buf[2];
     float resistor;
     uint16_t times;
@@ -912,7 +913,24 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
         return 1;                                                                                     /* return error */
     }
     *raw = (uint16_t)(((uint16_t)buf[0]) << 8) | buf[1];                                              /* get raw data */
-    if (((*raw) & 0x01) != 0)
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                                 /* read config */
+    if (res != 0)                                                                                     /* check result */
+    {
+        handle->debug_print("max31865: read failed.\n");                                              /* read failed */
+       
+        return 1;                                                                                     /* return error */
+    }
+    prev &= ~(1 << 7);                                                                                /* disable vbias */
+    prev &= ~(1 << 6);                                                                                /* set normally off */
+    prev &= ~(1 << 5);                                                                                /* clear 1-shot */
+    res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);           /* write config */
+    if (res != 0)                                                                                     /* check result */
+    {
+        handle->debug_print("max31865: write failed.\n");                                             /* write failed */
+       
+        return 1;                                                                                     /* return error */
+    }
+    if (((*raw) & 0x01) != 0)                                                                         /* check result */
     {
         handle->debug_print("max31865: find rtd fault.\n");                                           /* find rtd fault */
        
@@ -922,7 +940,7 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
     {
         (*raw) = (*raw) >> 1;                                                                         /* get raw data */
     }
-    if (handle->resistor == MAX31865_RESISTOR_100PT)                                                  /* if 100PT */
+    if (handle->resistor == MAX31865_RESISTOR_100PT)                                                  /* if 100pt */
     {
         resistor = 100.0f;                                                                            /* set resistor type 100 */
     }
@@ -947,7 +965,8 @@ uint8_t max31865_single_read(max31865_handle_t *handle, uint16_t *raw, float *te
  */
 uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
 {
-    uint8_t res, prev;
+    uint8_t res;
+    uint8_t prev;
     
     if (handle == NULL)                                                                             /* check handle */
     {
@@ -958,7 +977,6 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
         return 3;                                                                                   /* return error */
     }
     
-    handle->delay_ms(10);                                                                           /* delay 10 ms */
     res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
     if (res != 0)                                                                                   /* check result */
     {
@@ -966,7 +984,25 @@ uint8_t max31865_start_continuous_read(max31865_handle_t *handle)
        
         return 1;                                                                                   /* return error */
     }
-    prev |= 1 << 7;                                                                                 /* enable vbias */
+    prev |= 1 << 7;                                                                                 /* enable vbias first */
+    prev &= ~(1 << 6);                                                                              /* keep normally off */
+    prev &= ~(1 << 5);                                                                              /* disable shot */
+    res = handle->spi_write(MAX31865_REG_CONFIG | WRITE_ADDRESS_MASK, (uint8_t *)&prev, 1);         /* write config */
+    if (res != 0)                                                                                   /* check result */
+    {
+        handle->debug_print("max31865: write failed.\n");                                           /* write failed */
+       
+        return 1;                                                                                   /* return error */
+    }
+    handle->delay_ms(15);                                                                           /* wait vbias startup */
+    res = handle->spi_read(MAX31865_REG_CONFIG, (uint8_t *)&prev, 1);                               /* read config */
+    if (res != 0)                                                                                   /* check result */
+    {
+        handle->debug_print("max31865: read failed.\n");                                            /* read failed */
+       
+        return 1;                                                                                   /* return error */
+    }
+    prev |= 1 << 7;                                                                                 /* keep vbias enabled */
     prev |= 1 << 6;                                                                                 /* set auto mode */
     prev &= ~(1 << 5);                                                                              /* disable shot */
 
